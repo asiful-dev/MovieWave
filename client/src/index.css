@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eefaff;
+  --color-primary-100: #daf3ff;
+  --color-primary-200: #bdebff;
+  --color-primary-300: #8fe0ff;
+  --color-primary-400: #5accff;
+  --color-primary-500: #34b1fd; /* soft core blue */
+  --color-primary-600: #2196f3; /* main brand color */
+  --color-primary-700: #167bdf;
+  --color-primary-800: #1863b5;
+  --color-primary-900: #1a548e;
+  --color-primary-950: #153456;
+  --color-primary-1000: #0c1f33; /* new deep shade for contrast or dark UI */
+
+  /* Secondary: Accent or Interaction Color (optional) */
+  --color-secondary: #00bcd4; /* Teal accent used in waveforms or CTAs */
+
+  /* Backgrounds */
+  --color-background-dark: #0d1117;
+  --color-surface: #161b22;
+
+  /* Texts */
+  --color-text-primary: #e5ecf4;
+  --color-text-secondary: #8b9eb3;
+
+  /* Feedback */
+  --color-error: #f44336;
+  --color-success: #4caf50;
+  --gradient-one: linear-gradient(45deg, #00bcd4, #2196f3);
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #787777 #1e1e1e;
+}
+
+body {
+  color: var(--color-text-primary);
+  background-color: var(--color-background-dark);
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Removes the default up/down spin buttons from number input fields in WebKit browsers (like Chrome, Safari) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
