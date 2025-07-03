@@ -4,6 +4,7 @@ import { getNowPlayingMovies, getUpcomingMovies } from "../controllers/show.cont
 
 const router = Router();
 
+
 router.route("/now-playing").get(getNowPlayingMovies);
 router.route("/upcoming").get(getUpcomingMovies);
 
