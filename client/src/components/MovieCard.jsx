@@ -29,7 +29,7 @@ const MovieCard = ({ movie }) => {
         scale: 1.03,
       }}
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
-      className="relative w-full max-w-sm rounded-xl overflow-hidden shadow-lg cursor-pointer group perspective-1000"
+      className="relative w-full h-[30rem] max-w-sm rounded-xl overflow-hidden shadow-lg cursor-pointer group perspective-1000"
     >
       <Link to={`/movie-details/${movie.id}`}>
         <img

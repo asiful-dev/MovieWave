@@ -41,9 +41,9 @@ const UpcomingMovies = () => {
   }, []);
 
   return (
-    <section className="px-6 md:px-16 lg:px-36 py-12 text-white relative">
+    <section className="px-6 md:px-16 lg:px-20 py-12 text-white relative">
       <BlurCircle top="-100px" left="50px"/>
-      <h2 className="text-2xl md:text-3xl font-bold mb-6">
+      <h2 className="text-lg font-medium mb-6 text-gray-300">
         Upcoming Releases
       </h2>
 

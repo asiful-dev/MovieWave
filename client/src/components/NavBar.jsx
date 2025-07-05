@@ -46,8 +46,8 @@ const NavBar = () => {
 
       <div className="hidden ml-14 md:flex items-center gap-4">
         <Button
-          className="border border-slate-600 px-4 py-2 rounded-full text-sm font-medium transition"
-          bgColor="bg-transparent"
+          className="border border-slate-600  px-4 py-2 rounded-full text-sm font-medium transition"
+          bgColor="bg-white/10"
           hoverColor="bg-slate-800"
           textColor="text-white"
         >
@@ -115,8 +115,8 @@ const NavBar = () => {
 
           <div className="mt-4 flex flex-col items-center gap-3 w-36 px-4">
             <Button
-              className="w-36 border border-black px-4 py-2 rounded-full text-sm font-medium transition"
-              bgColor="bg-black"
+              className="w-36 bg-black border border-black px-4 py-2 rounded-full text-sm font-medium transition"
+              bgColor=""
               hoverColor=""
               textColor="text-white"
             >
