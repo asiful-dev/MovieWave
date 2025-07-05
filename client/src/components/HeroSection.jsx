@@ -55,7 +55,7 @@ const HeroSection = () => {
 
   const image_base_url=import.meta.env.VITE_TMDB_IMAGE_BASE_URL
   return (
-    <div className="w-full h-[90vh] relative">
+    <div className="w-full h-screen relative">
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -70,15 +70,15 @@ const HeroSection = () => {
                 backgroundImage: `url(${image_base_url}${movie.backdrop_path})`,
               }}
             >
-              <div className="max-w-xl bg-black/80 p-8 rounded-2xl shadow-lg backdrop-blur-sm">
-                <h2 className="text-4xl md:text-3xl font-extrabold mb-4 flex items-center gap-2">
+              <div className="max-w-xl bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg backdrop-blur-sm">
+                <h2 className="text-4xl md:text-4xl font-extrabold mb-4 flex items-center gap-2">
                   <FilmIcon className="w-7 h-7 text-blue-400" /> {movie.title}
                 </h2>
 
-                <div className="mb-2 text-sm flex items-center gap-4 flex-wrap text-slate-300">
+                <div className="mb-2 text-md flex items-center gap-4 flex-wrap text-slate-300">
                   <span className="flex items-center gap-x-2">
                     <InfoIcon className="w-4 h-4 text-blue-300" />
-                    {movie.genre_ids.map((id) => genreMap[id]).join(", ")}
+                    {movie.genre_ids.map((id) => genreMap[id]).join(" | ")}
                   </span>
                   <span className="flex items-center gap-x-2">
                     <CalendarIcon className="w-4 h-4 text-blue-300" />

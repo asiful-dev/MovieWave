@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { assests } from "../assets/assests.js";
-import { Link } from "react-router-dom";
-import { XIcon } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { TicketPlus, XIcon } from "lucide-react";
 import Button from "./Button.jsx";
+import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 
 const NavBar = () => {
   const navItems = ["Home", "Movies", "Theaters", "Releases", "Favourites"];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user } = useUser();
+  const { openSignIn } = useClerk();
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
   return (
-    <nav className="flex items-center justify-between mx-4 max-md:w-full max-md:justify-between px-6 py-2 rounded-full text-white text-sm relative">
+    <nav className="flex items-center justify-between w-full px-6 py-2 rounded-full text-white text-sm fixed top-0 left-0 z-50 bg-transparent">
+      
       <Link to="/">
         <img
           src={assests.favicon}
@@ -22,7 +27,7 @@ const NavBar = () => {
         />
       </Link>
 
-      <div className="hidden md:flex items-center gap-6 ml-7">
+      <div className="hidden md:flex items-center gap-6 ml-7 backdrop-blur-3xl bg-white/10 px-6 py-4 rounded-full ">
         {navItems.map((item) => (
           <Link
             key={item}
@@ -50,14 +55,27 @@ const NavBar = () => {
         </Button>
 
         {/* Login Button */}
-        <Button
-          className="px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          bgColor="bg-primary-700"
-          hoverColor="bg-primary-700/60"
-          textColor="text-white"
-        >
-          Login
-        </Button>
+        {!user ? (
+          <Button
+            onClick={openSignIn}
+            className="px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            bgColor="bg-primary-700"
+            hoverColor="bg-primary-700/60"
+            textColor="text-white"
+          >
+            Login
+          </Button>
+        ) : (
+          <UserButton>
+            <UserButton.MenuItems>
+              <UserButton.Action
+                onClick={() => navigate("/my-bookings")}
+                label="My Bookings"
+                labelIcon={<TicketPlus className="w-[1rem]"/>}
+              />
+            </UserButton.MenuItems>
+          </UserButton>
+        )}
       </div>
 
       <button onClick={toggleMobileMenu} className="md:hidden text-white">
@@ -97,9 +115,9 @@ const NavBar = () => {
 
           <div className="mt-4 flex flex-col items-center gap-3 w-36 px-4">
             <Button
-              className="w-36 border border-slate-600 px-4 py-2 rounded-full text-sm font-medium transition"
-              bgColor="bg-transparent"
-              hoverColor="bg-slate-800"
+              className="w-36 border border-black px-4 py-2 rounded-full text-sm font-medium transition"
+              bgColor="bg-black"
+              hoverColor=""
               textColor="text-white"
             >
               Contact

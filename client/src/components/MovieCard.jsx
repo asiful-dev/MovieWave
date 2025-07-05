@@ -35,7 +35,7 @@ const MovieCard = ({ movie }) => {
         <img
           src={`${image_base_url}${movie.poster_path}`}
           alt={movie.title}
-          className="w-full h-64 object-cover"
+          className="w-full object-cover"
         />
       </Link>
 
@@ -75,7 +75,7 @@ const MovieCard = ({ movie }) => {
           </motion.div>
 
           <span className="flex items-center gap-1 text-sm text-yellow-400 font-semibold">
-            <StarIcon className="w-4 h-4" />
+            <StarIcon className="w-4 h-4 fill-yellow-400" />
             {movie.vote_average.toFixed(1)}
           </span>
         </div>
