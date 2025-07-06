@@ -7,6 +7,15 @@ export const inngest = new Inngest({
     signingKey: process.env.INNGEST_SIGNING_KEY,
 });
 
+export const testFunction= inngest.createFunction(
+  { id: "test-sync" },
+  { event: "test.sync" },
+  async () => {
+    console.log("✅ Synced successfully!");
+    return { success: true };
+  }
+)
+
 const syncUserCreation = inngest.createFunction(
     { id: "sync-user-creation" },
     { event: "clerk/user.created" },
@@ -67,5 +76,6 @@ const syncUserUpdation = inngest.createFunction(
 export const functions = [
     syncUserCreation,
     syncUserDeletion,
-    syncUserUpdation
+    syncUserUpdation,
+    testFunction
 ]
