@@ -55,3 +55,6 @@ build/
 
 # Test output
 test-output/
+
+#miscellaneous
+test.*

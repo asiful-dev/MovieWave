@@ -4,7 +4,7 @@ import asyncHandler from "../utils/asyncHandler.js"
 
 const protectedAdmin = [
     auth(),
-    asyncHandler(async (req, res, next) => {
+    asyncHandler(async (req, _, next) => {
         const { userId } = req.auth();
         if (!userId) {
             throw new apiError(401, "Not authenticated");

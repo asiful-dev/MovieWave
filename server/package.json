@@ -21,6 +21,9 @@
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "inngest": "^3.40.0",
-    "mongoose": "^8.16.1"
+    "mongoose": "^8.16.1",
+    "sslcommerz-lts": "^1.1.0",
+    "stripe": "^18.3.0",
+    "svix": "^1.68.0"
   }
 }
