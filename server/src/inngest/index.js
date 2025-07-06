@@ -2,7 +2,7 @@ import { Inngest } from "inngest"
 import { User } from "../models/user.models.js"
 
 export const inngest = new Inngest({
-    id: "MovieWave", 
+    id: "MovieWave" 
 });
 
 export const testFunction= inngest.createFunction(
