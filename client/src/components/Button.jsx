@@ -18,13 +18,13 @@ const Button = ({
   children,
   bgColor = "bg-primary-700",
   textColor = "white",
-  hoverColor = "bg-primary-700/60",
+  
   className,
   ...props
 }) => {
   return (
     <button
-      className={`${bgColor} ${textColor} cursor-pointer hover:${hoverColor} ${className}`}
+      className={`${bgColor} ${textColor} cursor-pointer ${className}`}
       {...props}
     >
       {children}

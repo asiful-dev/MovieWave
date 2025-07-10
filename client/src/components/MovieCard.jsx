@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CalendarIcon, GlobeIcon, StarIcon } from "lucide-react";
 import Button from "./Button";
-import {Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 const genreMap = {
   28: "Action",
   12: "Adventure",
@@ -66,12 +66,14 @@ const MovieCard = ({ movie }) => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Button
-              className="px-4 py-1.5 rounded-full text-xs font-medium transition"
-              hoverColor="bg-primary-700/60"
-            >
-              Book Now
-            </Button>
+            <Link to={`/movies/${movie.id}`}>
+              <Button
+                className="px-4 py-1.5 rounded-full text-xs font-medium transition"
+                hoverColor="bg-primary-700/60"
+              >
+                Book Now
+              </Button>
+            </Link>
           </motion.div>
 
           <span className="flex items-center gap-1 text-sm text-yellow-400 font-semibold">

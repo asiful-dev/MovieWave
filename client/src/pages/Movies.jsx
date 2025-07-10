@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BlurCircle from "../components/BlurCricle";
 import MovieCard from "../components/MovieCard";
-import { Link } from "react-router-dom";
-import Button from "../components/Button";
-
+import Loader from "../components/Loader"
 const Movies = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
 
@@ -27,7 +25,7 @@ const Movies = () => {
   useEffect(() => {
     getNowPlayingMovies();
   }, []);
-  return (
+  return nowPlayingMovies? (
     <div className="px-6 md:px-16 lg:px-20 overflow-hidden ">
       <div className="relative flex items-center justify-between pt-[10rem] pb-10 ">
         <BlurCircle top="0" right="-100px" />
@@ -45,7 +43,7 @@ const Movies = () => {
       </div>
 
     </div>
-  );
+  ):(<Loader/>)
 };
 
 export default Movies;

@@ -57,11 +57,11 @@ const UpcomingMovies = () => {
         }}
         autoplay={{ delay: 4000 }}
         modules={[Autoplay]}
-        className="w-full"
+        className="w-full "
       >
         {upcoming.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <div className="bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+            <div className="backdrop-blur-sm rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
               <img
                 src={`${image_base}${movie.poster_path}`}
                 alt={movie.title}
