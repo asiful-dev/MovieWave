@@ -1,12 +1,14 @@
 import express from "express"
 import cors from "cors"
-
+import { clerkMiddleware } from '@clerk/express'
 
 
 const app = express();
 
 
 //middlewares
+app.use(clerkMiddleware())
+
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
