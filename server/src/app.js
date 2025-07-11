@@ -34,18 +34,7 @@ import { inngest, functions } from "./Inngest/inngest.js"
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
-/* 
-inngest test endpoint
 
-app.get("/api/hello", async function (req, res, next) {
-    await inngest.send({
-        name: "test/hello.world",
-        data: {
-            email: "testUser@example.com",
-        },
-    }).catch(err => next(err));
-    res.json({ message: 'Event sent!' });
-}); */
 
 
 export { app }
