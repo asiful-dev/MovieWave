@@ -31,9 +31,16 @@ app.get('/', (req, res) => {
 
 import { serve } from "inngest/express";
 import { inngest, functions } from "./Inngest/inngest.js"
+import showRouter from "./routes/show.routes.js";
+
+
+
+
+
+
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
-
+app.use("/api/show",showRouter);
 
 
 
