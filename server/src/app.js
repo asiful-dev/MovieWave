@@ -24,4 +24,11 @@ app.use(express.urlencoded({
 }));
 
 
+
+import { serve } from "inngest/express";
+import { inngest, functions } from "./Inngest/inngest.js"
+
+app.use("/api/inngest", serve({ client: inngest, functions }));
+
+
 export { app }
