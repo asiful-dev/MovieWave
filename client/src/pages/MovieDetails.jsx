@@ -4,7 +4,7 @@ import Loader from "../components/Loader";
 import BlurCircle from "../components/BlurCricle";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CalendarIcon, StarIcon, ClockIcon } from "lucide-react";
+import { CalendarIcon, StarIcon, ClockIcon, HeartIcon } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import timeFormat from "../lib/timeFormat";
@@ -20,6 +20,7 @@ const MovieDetails = () => {
   const [cast, setCast] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [show, setShow] = useState(null);
+  const [clicked,setClicked]=useState(false);
 
   const fetchMovieData = async () => {
     try {
@@ -48,6 +49,8 @@ const MovieDetails = () => {
       console.error("Error fetching movie details:", err);
     }
   };
+
+  
 
   useEffect(() => {
     fetchMovieData();
@@ -112,6 +115,12 @@ const MovieDetails = () => {
             >
               Buy Tickets
             </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="transition backdrop-blur-md"
+            >
+              <HeartIcon className="fill-red-500 text-red-500" />
+            </motion.button>
           </div>
         </div>
       </motion.div>
@@ -158,9 +167,7 @@ const MovieDetails = () => {
       )}
 
       <section className="mt-20">
-        <h2 className="text-xl font-semibold  mb-6">
-          You May Also Like
-        </h2>
+        <h2 className="text-xl font-semibold  mb-6">You May Also Like</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {recommendations.map((rec) => (
             <motion.div
