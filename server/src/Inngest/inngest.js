@@ -37,7 +37,7 @@ const userDeleted = inngest.createFunction(
     async ({ event }) => {
         try {
             const { id } = event.data;
-            const response = await User.findOneAndDelete(id);
+            const response = await User.findByIdAndDelete(id);
             if (!response) throw new ApiError(404, "User Not Found!")
         } catch (error) {
             console.log("Failed to delete user", error);
