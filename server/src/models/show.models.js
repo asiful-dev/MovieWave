@@ -20,4 +20,6 @@ const showSchema = new Schema({
     }
 }, { minimize: false, timestamps: true });
 
-export const Show = model("Show", showSchema);
+const Show = model("Show", showSchema);
+
+export default Show;

@@ -50,4 +50,6 @@ const movieSchema = new Schema({
     },
 }, { timestamps: true })
 
-export const Movie = model("Movie", movieSchema);
+const Movie = model("Movie", movieSchema);
+
+export default Movie;
