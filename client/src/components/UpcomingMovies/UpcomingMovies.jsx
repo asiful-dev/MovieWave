@@ -6,40 +6,15 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { CalendarIcon, BellIcon, Clock } from "lucide-react";
 import BlurCircle from "../BlurCricle";
+import { useAppContext } from "../../context/AppContext";
 
-const image_base = "https://image.tmdb.org/t/p/w500";
 
-const getCountdown = (releaseDate) => {
-  const now = new Date();
-  const target = new Date(releaseDate);
-  const diff = Math.max(target - now, 0);
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  return `${days} day${days !== 1 ? "s" : ""} left`;
-};
+
+
+
 
 const UpcomingMovies = () => {
-  const [upcoming, setUpcoming] = useState([]);
-
-  const fetchUpcoming = async () => {
-    try {
-      const { data } = await axios.get(
-        "https://api.themoviedb.org/3/movie/upcoming",
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-          },
-        }
-      );
-      setUpcoming(data.results.slice(0, 10)); // Show top 10
-    } catch (error) {
-      console.error("Error fetching upcoming movies", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUpcoming();
-  }, []);
-
+ const {image_base_url,upcomingMovies}=useAppContext()
   return (
     <section className="px-6 md:px-16 lg:px-20 py-12 text-white relative">
       <BlurCircle top="-100px" left="50px"/>
@@ -59,11 +34,11 @@ const UpcomingMovies = () => {
         modules={[Autoplay]}
         className="w-full "
       >
-        {upcoming.map((movie) => (
+        {upcomingMovies.map((movie) => (
           <SwiperSlide key={movie.id}>
             <div className="backdrop-blur-sm rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
               <img
-                src={`${image_base}${movie.poster_path}`}
+                src={`${image_base_url}${movie.poster_path}`}
                 alt={movie.title}
                 className="w-full h-72 object-cover"
               />

@@ -2,30 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BlurCircle from "../components/BlurCricle";
 import MovieCard from "../components/MovieCard";
-import Loader from "../components/Loader"
+import Loader from "../components/Loader";
+import { useAppContext } from "../context/AppContext";
 const Movies = () => {
-  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
-
-  const getNowPlayingMovies = async () => {
-    try {
-      const { data } = await axios.get(
-        "https://api.themoviedb.org/3/movie/now_playing",
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-          },
-        }
-      );
-      setNowPlayingMovies(data.results);
-    } catch (error) {
-      console.error("Error Fetching Movies!", error);
-    }
-  };
-
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
-  return nowPlayingMovies? (
+  const { nowPlayingMovies } = useAppContext();
+  return nowPlayingMovies ? (
     <div className="px-6 md:px-16 lg:px-20 overflow-hidden ">
       <div className="relative flex items-center justify-between pt-[10rem] pb-10 ">
         <BlurCircle top="0" right="-100px" />
@@ -41,9 +22,10 @@ const Movies = () => {
         <BlurCircle bottom="0" right="-100px" />
         <BlurCircle bottom="0" left="-100px" />
       </div>
-
     </div>
-  ):(<Loader/>)
+  ) : (
+    <Loader />
+  );
 };
 
 export default Movies;

@@ -4,29 +4,10 @@ import MovieCard from "../MovieCard";
 import BlurCircle from "../BlurCricle";
 import Button from "../Button";
 import { Link } from "react-router";
+import { useAppContext } from "../../context/AppContext";
 
 const NowShowingSection = () => {
-  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
-
-  const getNowPlayingMovies = async () => {
-    try {
-      const { data } = await axios.get(
-        "https://api.themoviedb.org/3/movie/now_playing",
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-          },
-        }
-      );
-      setNowPlayingMovies(data.results);
-    } catch (error) {
-      console.error("Error Fetching Movies!", error);
-    }
-  };
-
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
+  const { nowPlayingMovies, image_base_url, genreMap } = useAppContext();
   return (
     <div className="px-6 md:px-16 lg:px-20 overflow-hidden">
       <div className="relative flex items-center justify-between pt-20 pb-10">
@@ -40,7 +21,6 @@ const NowShowingSection = () => {
         ))}
       </div>
       <div className="my-10 flex justify-center">
-        
         <Link to="/movies">
           <Button className="w-36 font-medium p-3 rounded-full">
             Show More

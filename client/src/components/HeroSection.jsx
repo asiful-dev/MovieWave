@@ -7,53 +7,14 @@ import { Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarIcon, FilmIcon, InfoIcon } from "lucide-react";
 import truncateText from "../utils/truncateText";
+import { useAppContext } from "../context/AppContext";
 
-const genreMap = {
-  28: "Action",
-  12: "Adventure",
-  16: "Animation",
-  35: "Comedy",
-  80: "Crime",
-  99: "Documentary",
-  18: "Drama",
-  10751: "Family",
-  14: "Fantasy",
-  36: "History",
-  27: "Horror",
-  10402: "Music",
-  9648: "Mystery",
-  10749: "Romance",
-  878: "Science Fiction",
-  10770: "TV Movie",
-  53: "Thriller",
-  10752: "War",
-  37: "Western",
-};
+
 
 const HeroSection = () => {
-  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
-
-  const getNowPlayingMovies = async () => {
-    try {
-      const { data } = await axios.get(
-        "https://api.themoviedb.org/3/movie/now_playing",
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-          },
-        }
-      );
-      setNowPlayingMovies(data.results);
-    } catch (error) {
-      console.error("Error Fetching Movies!", error);
-    }
-  };
-
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
-
-  const image_base_url=import.meta.env.VITE_TMDB_IMAGE_BASE_URL
+ const {nowPlayingMovies,image_base_url,genreMap}=useAppContext();
+//  console.log(nowPlayingMovies);
+ 
   return (
     <div className="w-full h-screen relative">
       <Swiper
