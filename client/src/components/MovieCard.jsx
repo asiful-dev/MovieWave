@@ -3,24 +3,10 @@ import { motion } from "framer-motion";
 import { CalendarIcon, GlobeIcon, StarIcon } from "lucide-react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
-const genreMap = {
-  28: "Action",
-  12: "Adventure",
-  16: "Animation",
-  35: "Comedy",
-  80: "Crime",
-  18: "Drama",
-  14: "Fantasy",
-  27: "Horror",
-  10749: "Romance",
-  878: "Sci-Fi",
-  53: "Thriller",
-  10751: "Family",
-  // Add more if needed
-};
+import { useAppContext } from "../context/AppContext";
 
 const MovieCard = ({ movie }) => {
-  const image_base_url = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
+  const { image_base_url, genreMap, navigate } = useAppContext();
   return (
     <motion.div
       whileHover={{
@@ -31,13 +17,11 @@ const MovieCard = ({ movie }) => {
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
       className="relative w-full h-[30rem] max-w-sm rounded-xl overflow-hidden shadow-lg cursor-pointer group perspective-1000"
     >
-      <Link to={`/movie-details/${movie.id}`}>
-        <img
-          src={`${image_base_url}${movie.poster_path}`}
-          alt={movie.title}
-          className="w-full object-cover"
-        />
-      </Link>
+      <img
+        src={`${image_base_url}${movie.poster_path}`}
+        alt={movie.title}
+        className="w-full object-cover"
+      />
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent p-4 flex flex-col justify-end">
@@ -53,9 +37,9 @@ const MovieCard = ({ movie }) => {
             {movie.release_date}
           </span>
           <span className="flex items-center gap-1">
-            {movie.genre_ids
+            {movie.genres
               .slice(0, 2)
-              .map((id) => genreMap[id])
+              .map((genre) => genre.name)
               .join(", ")}
           </span>
         </div>
@@ -66,14 +50,15 @@ const MovieCard = ({ movie }) => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Link to={`/movies/${movie.id}`}>
-              <Button
-                className="px-4 py-1.5 rounded-full text-xs font-medium transition"
-                hoverColor="bg-primary-700/60"
-              >
-                Book Now
-              </Button>
-            </Link>
+            <Button
+              className="px-4 py-1.5 rounded-full text-xs font-medium hover:bg-primary-700/60 transition"
+              onClick={() => {
+                navigate(`/movies/${movie.id}`);
+                scrollTo(0, 0);
+              }}
+            >
+              Book Now
+            </Button>
           </motion.div>
 
           <span className="flex items-center gap-1 text-sm text-yellow-400 font-semibold">

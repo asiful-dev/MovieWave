@@ -1,11 +1,13 @@
 import logo from "/logo.png"
 import favicon from "/favicon.png"
-
-
+import adventure from "./adventure.jpg"
+import profile from "./profile.svg"
 
 const assests = {
     logo,
-    favicon
+    favicon,
+    adventure,
+    profile
 }
 
 const dummyCastsData = [
@@ -195,80 +197,97 @@ export const dummyDateTimeData = {
 }
 
 export const dummyDashboardData = {
-    "totalBookings": 14,
-    "totalRevenue": 1517,
-    "totalUser": 5,
-    "activeShows": [
-        {
-            "_id": "68352363e96d99513e4221a4",
-            "movie": dummyShowsData[0],
-            "showDateTime": "2025-06-30T02:30:00.000Z",
-            "showPrice": 59,
-            "occupiedSeats": {
-                "A1": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "B1": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "C1": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok"
-            },
-        },
-        {
-            "_id": "6835238fe96d99513e4221a8",
-            "movie": dummyShowsData[1],
-            "showDateTime": "2025-06-30T15:30:00.000Z",
-            "showPrice": 81,
-            "occupiedSeats": {},
-        },
-        {
-            "_id": "6835238fe96d99513e4221a9",
-            "movie": dummyShowsData[2],
-            "showDateTime": "2025-06-30T03:30:00.000Z",
-            "showPrice": 81,
-            "occupiedSeats": {},
-        },
-        {
-            "_id": "6835238fe96d99513e4221aa",
-            "movie": dummyShowsData[3],
-            "showDateTime": "2025-07-15T16:30:00.000Z",
-            "showPrice": 81,
-            "occupiedSeats": {
-                "A1": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "A2": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "A3": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "A4": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok"
-            },
-        },
-        {
-            "_id": "683682072b5989c29fc6dc0d",
-            "movie": dummyShowsData[4],
-            "showDateTime": "2025-06-05T15:30:00.000Z",
-            "showPrice": 49,
-            "occupiedSeats": {
-                "A1": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "A2": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "A3": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "B1": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "B2": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok",
-                "B3": "user_2xO4XPCgWWwWq9EHuQxc5UWqIok"
-            },
-            "__v": 0
-        },
-        {
-            "_id": "68380044686d454f2116b39a",
-            "movie": dummyShowsData[5],
-            "showDateTime": "2025-06-20T16:00:00.000Z",
-            "showPrice": 79,
-            "occupiedSeats": {
-                "A1": "user_2xl7eCSUHddibk5lRxfOtw9RMwX",
-                "A2": "user_2xl7eCSUHddibk5lRxfOtw9RMwX"
-            }
-        }
-    ]
-}
+  totalBookings: 1542,
+  totalRevenue: 47850,
+  totalUser: 812,
+  
+  activeShows: [
+    {
+      id: "show_001",
+      movie: "Avengers: Endgame",
+      showDateTime: "2025-07-12T18:30:00",
+      showPrice: 12,
+      occupiedSeats: {
+        A1: "booked",
+        A2: "booked",
+        A3: "available",
+        B1: "booked",
+        B2: "available",
+      },
+    },
+    {
+      id: "show_002",
+      movie: "Dune: Part Two",
+      showDateTime: "2025-07-13T20:00:00",
+      showPrice: 10,
+      occupiedSeats: {
+        A1: "booked",
+        A2: "booked",
+        B1: "booked",
+      },
+    },
+    {
+      id: "show_003",
+      movie: "Inside Out 2",
+      showDateTime: "2025-07-14T15:00:00",
+      showPrice: 8,
+      occupiedSeats: {
+        A1: "available",
+        A2: "booked",
+        B1: "available",
+      },
+    }
+  ],
+
+  totalRevenueOverTime: [
+    { date: "2025-07-01", revenue: 3200 },
+    { date: "2025-07-02", revenue: 4500 },
+    { date: "2025-07-03", revenue: 4100 },
+    { date: "2025-07-04", revenue: 5200 },
+    { date: "2025-07-05", revenue: 3950 },
+    { date: "2025-07-06", revenue: 6000 },
+    { date: "2025-07-07", revenue: 4900 },
+  ],
+
+  ticketsSoldOverTime: [
+    { date: "2025-07-01", ticketsSold: 150 },
+    { date: "2025-07-02", ticketsSold: 180 },
+    { date: "2025-07-03", ticketsSold: 165 },
+    { date: "2025-07-04", ticketsSold: 200 },
+    { date: "2025-07-05", ticketsSold: 140 },
+    { date: "2025-07-06", ticketsSold: 230 },
+    { date: "2025-07-07", ticketsSold: 175 },
+  ],
+
+  topPerformingMovies: [
+    { movie: "Avengers: Endgame", revenue: 12500 },
+    { movie: "Dune: Part Two", revenue: 8900 },
+    { movie: "Inside Out 2", revenue: 7600 },
+    { movie: "Oppenheimer", revenue: 6200 },
+    { movie: "The Batman", revenue: 5100 },
+  ],
+
+  userActivityBookingFrequency: [
+    { userId: "user_001", bookingCount: 5 },
+    { userId: "user_002", bookingCount: 3 },
+    { userId: "user_003", bookingCount: 8 },
+    { userId: "user_004", bookingCount: 2 },
+    { userId: "user_005", bookingCount: 6 },
+  ],
+
+  pieChartData: [
+    { category: "Booked Seats", value: 420 },
+    { category: "Available Seats", value: 180 },
+    { category: "Cancelled", value: 40 },
+  ],
+};
+
 
 
 export const dummyBookingData = [
     {
         "_id": "68396334fb83252d82e17295",
-        "user": { "name": "GreatStack", },
+        "user": { "name": "Asiful", },
         "show": {
             _id: "68352363e96d99513e4221a4",
             movie: dummyShowsData[0],
@@ -281,10 +300,10 @@ export const dummyBookingData = [
     },
     {
         "_id": "68396334fb83252d82e17295",
-        "user": { "name": "GreatStack", },
+        "user": { "name": "Alice", },
         "show": {
             _id: "68352363e96d99513e4221a4",
-            movie: dummyShowsData[0],
+            movie: dummyShowsData[1],
             showDateTime: "2025-06-30T02:30:00.000Z",
             showPrice: 59,
         },
@@ -294,10 +313,10 @@ export const dummyBookingData = [
     },
     {
         "_id": "68396334fb83252d82e17295",
-        "user": { "name": "GreatStack", },
+        "user": { "name": "Jhon Doe", },
         "show": {
             _id: "68352363e96d99513e4221a4",
-            movie: dummyShowsData[0],
+            movie: dummyShowsData[2],
             showDateTime: "2025-06-30T02:30:00.000Z",
             showPrice: 59,
         },

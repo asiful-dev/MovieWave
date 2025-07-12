@@ -11,16 +11,52 @@ import timeFormat from "../lib/timeFormat";
 import axios from "axios";
 import "swiper/css";
 import DateSelect from "../components/DateSelect";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const MovieDetails = () => {
-  const imageBase = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
+  const { image_base_url, navigate, shows } = useAppContext();
+  // console.log("From Movie details\n shows ");
 
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [show, setShow] = useState(null);
-  const [clicked,setClicked]=useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const fetchRecommendations = async () => {
+    try {
+      const {data}= await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/recommendations`,
+        {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+          },
+        }
+      );
+      console.log(data);
+      
+      if (data) setRecommendations(data.results.slice(0,4));
+    } catch (error) {
+      console.error("Failed to fetch movie recommendations \n", error);
+    }
+  };
+
+  const getShow = async () => {
+    try {
+      const { data } = await axios.get(`/show/${id}`);
+      if (data.success) {
+        // console.log(data.data);
+        
+        setShow(data.data);
+        setCast(data.data[0].casts);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getMovieData = () => {};
 
   const fetchMovieData = async () => {
     try {
@@ -39,7 +75,7 @@ const MovieDetails = () => {
         ),
       ]);
 
-      setCast(castRes.data.cast.slice(0, 8));
+      setCast(castRes.data.cast);
       setRecommendations(recRes.data.results.slice(0, 4));
       setShow({
         movie: movieRes.data,
@@ -50,10 +86,10 @@ const MovieDetails = () => {
     }
   };
 
-  
-
   useEffect(() => {
-    fetchMovieData();
+    getShow();
+    fetchRecommendations();
+    // fetchMovieData();
   }, [id]);
 
   return show ? (
@@ -69,36 +105,36 @@ const MovieDetails = () => {
         <motion.img
           whileHover={{ scale: 1.05, rotate: 1 }}
           transition={{ type: "spring", stiffness: 300 }}
-          src={`${imageBase}${show.movie.poster_path}`}
-          alt={show.movie.title}
+          src={`${image_base_url}${show[0].poster_path}`}
+          alt={show[0].title}
           className="w-72 rounded-xl shadow-xl"
         />
 
         <div className="flex-1 space-y-4">
           <p className="uppercase text-sm text-primary-400">
-            {show.movie.original_language.toUpperCase()}
+            {show[0].original_language.toUpperCase()}
           </p>
           <h1 className="text-4xl font-extrabold text-primary-100">
-            {show.movie.title}
+            {show[0].title}
           </h1>
 
           <div className="flex items-center gap-4 text-sm text-gray-300">
             <span className="flex items-center gap-1">
               <StarIcon className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              {show.movie.vote_average.toFixed(1)}
+              {show[0].vote_average.toFixed(1)}
             </span>
             <span className="flex items-center gap-1">
               <ClockIcon className="w-4 h-4 text-primary-400" />
-              {timeFormat(show.movie.runtime)}
+              {timeFormat(show[0].runtime)}
             </span>
             <span className="flex items-center gap-1">
               <CalendarIcon className="w-4 h-4 text-primary-400" />
-              {show.movie.release_date}
+              {show[0].release_date}
             </span>
           </div>
 
           <p className="text-sm text-slate-300 leading-relaxed">
-            {show.movie.overview}
+            {show[0].overview}
           </p>
 
           <div className="flex gap-4 mt-4">
@@ -148,8 +184,8 @@ const MovieDetails = () => {
                 <img
                   src={
                     actor.profile_path
-                      ? `${imageBase}${actor.profile_path}`
-                      : "/placeholder.jpg"
+                      ? `${image_base_url}${actor.profile_path}`
+                      : "/placeholder.png"
                   }
                   alt={actor.name}
                   className="w-20 h-20 rounded-full object-cover mx-auto mb-2"
@@ -162,8 +198,8 @@ const MovieDetails = () => {
         </Swiper>
       </section>
 
-      {Object.keys(show.dateTime).length > 0 && (
-        <DateSelect id={show.movie.id} dateTime={show.dateTime} />
+      {Object.keys(show[1]).length > 0 && (
+        <DateSelect id={show[0].id} dateTime={show[1]} />
       )}
 
       <section className="mt-20">
@@ -176,7 +212,7 @@ const MovieDetails = () => {
               className="rounded-xl overflow-hidden shadow-lg bg-black/50"
             >
               <img
-                src={`${imageBase}${rec.backdrop_path || rec.poster_path}`}
+                src={`${image_base_url}${rec.backdrop_path || rec.poster_path}`}
                 alt={rec.title}
                 className="w-full h-40 object-cover"
               />

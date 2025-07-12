@@ -12,9 +12,27 @@ import SeatLayout from "./pages/SeatLayout";
 import MyBookings from "./pages/MyBookings";
 import Favourites from "./pages/Favourites";
 import Home from "./pages/Home";
-
+import { useAppContext } from "./context/AppContext";
+import { SignIn } from "@clerk/clerk-react";
+import Dashboard from "./pages/admin/Dashboard";
+import AddShows from "./pages/admin/AddShows";
+import ListShows from "./pages/admin/ListShows";
+import ListBookings from "./pages/admin/ListBookings";
+import AdminLayout from "./pages/admin/AdminLayout"
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
+
+  const AdminRoute = () => {
+    const { user } = useAppContext() || {};
+
+    if (!user)
+      return (
+        <div className="flex-1 px-4 py-10 md:px-10 h-[calc(100vh-64px)] overflow-y-auto">
+          <SignIn fallbackRedirectUrl={"/admin"} />
+        </div>
+      );
+    return <AdminLayout />;
+  };
 
   return (
     <>
@@ -28,7 +46,16 @@ function App() {
         <Route path="/movies/:id/:date" element={<SeatLayout />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/favourties" element={<Favourites />} />
+
+        {/* Admin routes */}
+        <Route path="/admin" element={<AdminRoute />}>
+          <Route index element={<Dashboard />} />
+          <Route path="add-shows" element={<AddShows />} />
+          <Route path="list-shows" element={<ListShows />} />
+          <Route path="list-bookings" element={<ListBookings />} />
+        </Route>
       </Routes>
+
       {!isAdminRoute && <Footer />}
     </>
   );

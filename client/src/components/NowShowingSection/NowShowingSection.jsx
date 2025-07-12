@@ -7,7 +7,9 @@ import { Link } from "react-router";
 import { useAppContext } from "../../context/AppContext";
 
 const NowShowingSection = () => {
-  const { nowPlayingMovies, image_base_url, genreMap } = useAppContext();
+  const { nowPlayingMovies, image_base_url, genreMap,shows,movies } = useAppContext();
+  // console.log("From Now Playing section\n movies ", movies);
+  
   return (
     <div className="px-6 md:px-16 lg:px-20 overflow-hidden">
       <div className="relative flex items-center justify-between pt-20 pb-10">
@@ -16,7 +18,7 @@ const NowShowingSection = () => {
         <p className="text-gray-300 font-medium text-lg">Now Showing</p>
       </div>
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row md:flex-wrap my-4">
-        {nowPlayingMovies.slice(0, 6).map((movie) => (
+        {shows.slice(0,6).map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
