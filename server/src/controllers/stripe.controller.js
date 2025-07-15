@@ -3,6 +3,7 @@ import AsyncHandler from "../utils/AsyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import Booking from "../models/booking.models.js";
 import ApiResponse from "../utils/ApiResponse.js";
+import { inngest } from "../Inngest/inngest.js";
 
 
 const stripeWebHooks = async (req, res) => {
@@ -36,6 +37,13 @@ const stripeWebHooks = async (req, res) => {
                     },
                     { new: true }
                 )
+
+                await inngest.send({
+                    name: "app/show.booked",
+                    data: {
+                        bookingId
+                    }
+                })
 
                 break;
             }
