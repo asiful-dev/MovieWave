@@ -108,45 +108,49 @@ const sendBookingConfirmationEmail = inngest.createFunction(
         }).populate("user")
 
         // Prepare email details
-        const showDate = booking.show.date.toLocaleString();
+        const showDate = new Date(booking.show.showDateTime).toLocaleDateString("en-US");
         const bookingAmount = booking.amount.toFixed(2);
         const movieTitle = booking.show.movie.title;
         const logoUrl = "https://res.cloudinary.com/dhqemmrzp/image/upload/v1752590882/logo_ddcb9l.png"; // Replace with your actual logo URL
 
+        const seatsList = booking.bookedSeats && booking.bookedSeats.length
+            ? booking.bookedSeats.join(", ")
+            : "N/A";
+
         const emailBody = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border:1px solid #eee; border-radius:8px; overflow:hidden; background: #f9fafb;">
             <div style="background: linear-gradient(90deg, #18181b 60%, #6366f1 100%); padding: 24px 0; text-align: center;">
-                <img src="${logoUrl}" alt="MovieWave Logo" style="height: 60px; margin-bottom: 10px;" />
-                <h1 style="color: #fff; margin: 0; font-size: 2rem; letter-spacing: 2px;">MovieWave</h1>
+            <img src="${logoUrl}" alt="MovieWave Logo" style="height: 60px; margin-bottom: 10px;" />
+            <h1 style="color: #fff; margin: 0; font-size: 2rem; letter-spacing: 2px;">MovieWave</h1>
             </div>
             <div style="padding: 32px 24px;">
-                <h2 style="color: #6366f1; margin-bottom: 8px;">Payment Confirmed!</h2>
-                <p style="font-size: 1.1rem;">Hi <strong>${booking.user.name || booking.user.email}</strong>,</p>
-                <p style="margin-bottom: 18px;">Your booking for <span style="color:#18181b; font-weight:800;">${movieTitle}</span> is <span style="color: #22c55e; font-weight:700;">locked in</span>! Get ready for an amazing movie experience.</p>
-                <table style="width:100%; margin: 24px 0; border-collapse: collapse; background: #fff; border-radius: 6px; box-shadow: 0 1px 4px #0001;">
-                <tr>
-                    <td style="padding: 10px 0; color: #555;">🎬 <b>Movie</b>:</td>
-                    <td style="padding: 10px 0; color: #18181b;">${movieTitle}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 0; color: #555;">📅 <b>Date</b>:</td>
-                    <td style="padding: 10px 0; color: #18181b;">${showDate}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 0; color: #555;">💺 <b>Seats</b>:</td>
-                    <td style="padding: 10px 0; color: #18181b;">${booking.bookedSeats.join(", ")}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px 0; color: #555;">💳 <b>Amount</b>:</td>
-                    <td style="padding: 10px 0; color: #18181b;">₹${bookingAmount}</td>
-                </tr>
-                </table>
-                <div style="background: #e0e7ff; padding: 16px; border-radius: 6px; margin-bottom: 18px;">
-                <p style="margin:0; color:#3730a3;">Tip: Arrive 15 minutes early to grab your snacks and settle in for the show!</p>
-                </div>
-                <p style="margin-top:32px;">🍿 Enjoy your movie!<br/><br/> — The MovieWave Team</p>
-                <hr style="margin:32px 0 16px 0; border:none; border-top:1px solid #eee;">
-                <p style="font-size:0.95rem; color:#888; text-align:center;">Need help? <a href="mailto:asifulislam756@gmail.com" style="color:#6366f1;">Contact support</a></p>
+            <h2 style="color: #6366f1; margin-bottom: 8px;">Payment Confirmed!</h2>
+            <p style="font-size: 1.1rem;">Hi <strong>${booking.user.name || booking.user.email}</strong>,</p>
+            <p style="margin-bottom: 18px;">Your booking for <span style="color:#18181b; font-weight:800;">${movieTitle}</span> is <span style="color: #22c55e; font-weight:700;">locked in</span>! Get ready for an amazing movie experience.</p>
+            <table style="width:100%; margin: 24px 0; border-collapse: collapse; background: #fff; border-radius: 6px; box-shadow: 0 1px 4px #0001;">
+            <tr>
+                <td style="padding: 10px 0; color: #555;">🎬 <b>Movie</b>:</td>
+                <td style="padding: 10px 0; color: #18181b;">${movieTitle}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px 0; color: #555;">📅 <b>Date</b>:</td>
+                <td style="padding: 10px 0; color: #18181b;">${showDate}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px 0; color: #555;">💺 <b>Seats</b>:</td>
+                <td style="padding: 10px 0; color: #18181b;">${seatsList}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px 0; color: #555;">💳 <b>Amount</b>:</td>
+                <td style="padding: 10px 0; color: #18181b;">₹${bookingAmount}</td>
+            </tr>
+            </table>
+            <div style="background: #e0e7ff; padding: 16px; border-radius: 6px; margin-bottom: 18px;">
+            <p style="margin:0; color:#3730a3;">Tip: Arrive 15 minutes early to grab your snacks and settle in for the show!</p>
+            </div>
+            <p style="margin-top:32px;">🍿 Enjoy your movie!<br/><br/> — The MovieWave Team</p>
+            <hr style="margin:32px 0 16px 0; border:none; border-top:1px solid #eee;">
+            <p style="font-size:0.95rem; color:#888; text-align:center;">Need help? <a href="mailto:asifulislam756@gmail.com" style="color:#6366f1;">Contact support</a></p>
             </div>
             </div>
         `;
