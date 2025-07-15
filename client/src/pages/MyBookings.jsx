@@ -10,17 +10,31 @@ import { TicketIcon, CalendarIcon, ClockIcon } from "lucide-react";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const { image_base_url } = useAppContext();
+  const [loading, setLoading] = useState(true);
+  const { axios, getToken, user, image_base_url } = useAppContext();
 
-  const getMyBookings = () => {
-    setBookings(dummyBookingData);
+  const getMyBookings = async () => {
+    try {
+      const { data } = await axios.get("/user/bookings", {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
+      console.log(data.data);
+
+      if (data.success) setBookings(data.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getMyBookings();
-  }, []);
+    if (user) getMyBookings();
+  }, [user]);
 
-  if (!bookings) return <Loader />;
+  if (loading) return <Loader />;
 
   return (
     <div className="relative px-6 md:px-16 lg:px-40 pt-30 md:pt-40 min-h-[80vh] text-white">
@@ -39,7 +53,7 @@ const MyBookings = () => {
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <img
-                src={assests.adventure}
+                src={`${image_base_url}${booking?.show?.movie?.poster_path}`}
                 alt="movie poster"
                 className="w-full md:w-52 h-32 object-cover rounded-md shadow-md"
               />
@@ -75,9 +89,7 @@ const MyBookings = () => {
               </div>
 
               <div className="flex flex-col items-end gap-2">
-                <span className="text-xl font-bold ">
-                  ${booking.amount}
-                </span>
+                <span className="text-xl font-bold ">${booking.amount}</span>
                 <button className="px-4 py-2 text-sm bg-primary-700 hover:bg-primary-400 rounded-full transition shadow-md">
                   Pay Now
                 </button>

@@ -18,7 +18,8 @@ import Dashboard from "./pages/admin/Dashboard";
 import AddShows from "./pages/admin/AddShows";
 import ListShows from "./pages/admin/ListShows";
 import ListBookings from "./pages/admin/ListBookings";
-import AdminLayout from "./pages/admin/AdminLayout"
+import AdminLayout from "./pages/admin/AdminLayout";
+import Loader from "./components/Loader";
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/movies/:id" element={<MovieDetails />} />
         <Route path="/movies/:id/:date" element={<SeatLayout />} />
         <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/loading/:nextUrl" element={<Loader />} />
         <Route path="/favourties" element={<Favourites />} />
 
         {/* Admin routes */}

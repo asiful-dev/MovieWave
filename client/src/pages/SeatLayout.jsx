@@ -4,10 +4,10 @@ import Button from "../components/Button";
 import { assests, dummyDateTimeData } from "../assets/assests";
 import Loader from "../components/Loader";
 import { ArrowRightIcon, ClockIcon } from "lucide-react";
-import axios from "axios";
 import isoTimeFormat from "../lib/isoTimeFormat";
 import BlurCircle from "../components/BlurCricle";
 import toast from "react-hot-toast";
+import { useAppContext } from "../context/AppContext";
 
 const SeatLayout = () => {
   const groupRows = [
@@ -22,6 +22,8 @@ const SeatLayout = () => {
       Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
     },
   };
+
+  const { axios, getToken, user } = useAppContext();
   const { id, date } = useParams();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -38,12 +40,14 @@ const SeatLayout = () => {
     }
   };
   function handleSeatClick(seatId) {
-    console.log("clicked!!");
 
     if (!selectedTime) return toast.error("Please Select Time First");
 
     if (!selectedSeats.includes(seatId) && selectedSeats.length > 4)
       return toast("You can only select 5 seats");
+
+    if (occupiedSeats.includes(seatId))
+      return toast("This seat is already booked");
 
     setSelectedSeats((prev) =>
       prev.includes(seatId)
@@ -60,11 +64,14 @@ const SeatLayout = () => {
             const seatId = `${row}${i + 1}`;
             return (
               <Button
-                className={`h-10 w-10 rounded border transition-all duration-200 ${
-                  selectedSeats.includes(seatId)
-                    ? "bg-primary-700 text-white"
-                    : "bg-transparent text-white hover:bg-primary-500 border-primary-700/30"
-                }`}
+                className={`h-10 w-10 rounded border transition-all duration-200 
+                  ${
+                    selectedSeats.includes(seatId)
+                      ? "bg-primary-700 text-white"
+                      : "bg-transparent text-white hover:bg-primary-500 border-primary-700/30"
+                  }
+                      ${occupiedSeats.includes(seatId) && "opacity-50"}
+                  `}
                 key={seatId}
                 onClick={() => handleSeatClick(seatId)}
               >
@@ -77,11 +84,41 @@ const SeatLayout = () => {
     );
   }
 
+  const getOccupiedSeats = async () => {
+    try {
+
+      const { data } = await axios.get(`/booking/seats/${selectedTime.showId}`);
+
+      if (data.success) {
+        console.log("Occupied Seats ", data.data);
+        setOccupiedSeats(data.data);
+      } else toast.error(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const bookTickets = async () => {
     try {
+      if (!user) return toast.error("Please Login to proceed!");
       if (!selectedTime || !selectedSeats.length)
         return toast.error("Please select a time and seats");
-      navigate("/my-bookings");
+
+      const { data } = await axios.post(
+        "/booking/create",
+        {
+          showId: selectedTime.showId,
+          selectedSeats,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+        }
+      );
+      if (data.success) {
+        window.location.href = data.data.url;
+      } else toast.error(data.message);
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -91,6 +128,11 @@ const SeatLayout = () => {
   useEffect(() => {
     getShow();
   }, [id]);
+
+  useEffect(() => {
+    getOccupiedSeats();
+  }, [selectedTime]);
+
   return show ? (
     <div className="flex flex-col md:flex-row justify-between px-6 md:px-16 lg:px-20 py-40 md:pt-50">
       <div className="w-60 bg-primary-700/10 border border-primary-700/20 rounded-lg py-10 h-max md:sticky md:top-30">

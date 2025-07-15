@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server":"nodemon -r dotenv/config --experimental-json-modules  src/index.js"
+    "server": "nodemon -r dotenv/config --experimental-json-modules  src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +18,9 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "inngest": "^3.40.1",
-    "mongoose": "^8.16.3"
+    "mongoose": "^8.16.3",
+    "stripe": "^18.3.0",
+    "svix": "^1.69.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

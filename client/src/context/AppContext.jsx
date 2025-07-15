@@ -15,6 +15,7 @@ const AppProvider = ({ children }) => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [shows, setShows] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const { getToken } = useAuth();
   const { user } = useUser();
@@ -43,6 +44,28 @@ const AppProvider = ({ children }) => {
     37: "Western",
   };
 
+  const fetchIsAdmin = async () => {
+    try {
+      const { data } = await axios.get("/admin/is-admin", {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
+
+      console.log(data?.data?.isAdmin);
+
+      const isTheUserAdmin = data?.data?.isAdmin;
+      setIsAdmin(isTheUserAdmin);
+
+      if (!isTheUserAdmin && location.pathname.startsWith("/admin")) {
+        navigate("/");
+        toast.error("You are not authorized to access admin dashbaord");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const fetchNowPlayingMovies = async () => {
     try {
       const { data } = await axios.get("/show/now-playing");
@@ -67,28 +90,9 @@ const AppProvider = ({ children }) => {
   const fetchShows = async () => {
     try {
       const { data } = await axios.get("/show/all");
-      // console.log("From context api\ndata ", data);
 
-      // console.log("\nshows type ",typeof(data.data));
-
-      if (data) {
-        // console.log("\ndhukse");
-        // console.log("Array te convert hocche naki dekhtesi ",Array.from(data.data.shows));
-
-        setShows(Array.from(data.data.shows));
-      } else toast.error(data.message);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchMovies = async () => {
-    try {
-      const { data } = await axios.get("/movie/all");
-      if (data.success) {
-        setMovies(data.data);
-        toast.success("Movies Fetched Successfully");
-      } else toast.error(data.message);
+      if (data) setShows(Array.from(data.data.shows));
+      else toast.error(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -96,7 +100,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchShows();
-    // fetchMovies();
+
     fetchNowPlayingMovies();
     fetchUpcomingMovies();
   }, []);
@@ -110,8 +114,9 @@ const AppProvider = ({ children }) => {
     upcomingMovies,
     genreMap,
     shows,
+    isAdmin,
     getToken,
-    fetchShows
+    fetchShows,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
