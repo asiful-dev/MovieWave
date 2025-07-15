@@ -29,10 +29,11 @@ const stripeWebHooks = AsyncHandler(async (req, res) => {
                 const session = sessionList.data[0];
                 const { bookingId } = session.metadata;
 
-                await Booking.findByIdAndUpdate(bookingId, {
+                const updatedBooking = await Booking.findByIdAndUpdate(bookingId, {
                     isPaid: true,
                     paymentLink: ""
                 })
+                if (!updatedBooking) throw new ApiError(404, "Booking Not Found");
             }
                 break;
 

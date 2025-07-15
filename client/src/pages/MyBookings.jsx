@@ -7,6 +7,7 @@ import timeFormat from "../lib/timeFormat";
 import dateFormat from "../lib/dateFormat";
 import { motion } from "framer-motion";
 import { TicketIcon, CalendarIcon, ClockIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -20,7 +21,7 @@ const MyBookings = () => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      console.log(data.data);
+      
 
       if (data.success) setBookings(data.data);
     } catch (error) {
@@ -90,9 +91,14 @@ const MyBookings = () => {
 
               <div className="flex flex-col items-end gap-2">
                 <span className="text-xl font-bold ">${booking.amount}</span>
-                <button className="px-4 py-2 text-sm bg-primary-700 hover:bg-primary-400 rounded-full transition shadow-md">
-                  Pay Now
-                </button>
+                {!booking.isPaid && (
+                  <Link
+                    to={booking.paymentLink}
+                    className="px-4 py-2 text-sm bg-primary-700 hover:bg-primary-400 rounded-full transition shadow-md cursor-pointer"
+                  >
+                    Pay Now
+                  </Link>
+                )}
               </div>
             </div>
 
