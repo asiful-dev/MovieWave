@@ -1,6 +1,8 @@
 import { Inngest } from "inngest"
 import User from "../models/user.models.js";
 import ApiError from "../utils/ApiError.js"
+import Booking from "../models/booking.models.js"
+import Show from "../models/show.models.js"
 
 //new inngest client
 const inngest = new Inngest({
@@ -67,7 +69,28 @@ const userUpdated = inngest.createFunction(
     }
 )
 
+const releaseSeatsAndDeleteBooking = inngest.createFunction(
+    { id: "release-seats-delete-booking" },
+    { event: "app/checkpayment" },
+    async ({ event, step }) => {
+        const timeLimit = new Date(Date.now() + 10 * 60 * 1000);
+        await step.sleepUntil("wait-for-10-minutes", timeLimit);
+        await step.run("check-payment-status", async () => {
+            const bookingId = event.data.bookingId;
+            const booking = await Booking.findById(bookingId);
 
+            if (!booking.isPaid) {
+                const show = await Show.findById(booking.show);
+                booking.bookedSeats.forEach((seat) => {
+                    delete show.occupiedSeats[seat];
+                });
+                show.markModified("occupiedSeats");
+                await show.save();
+                await Booking.findByIdAndDelete(booking._id);
+            }
+        })
+    }
+)
 
 
 
@@ -77,7 +100,8 @@ const userUpdated = inngest.createFunction(
 const functions = [
     userCreation,
     userDeleted,
-    userUpdated
+    userUpdated,
+    releaseSeatsAndDeleteBooking
 ]
 
 export {

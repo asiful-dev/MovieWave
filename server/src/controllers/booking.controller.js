@@ -4,6 +4,7 @@ import ApiResponse from "../utils/ApiResponse.js";
 import Show from "../models/show.models.js";
 import Booking from "../models/booking.models.js";
 import stripe from "stripe"
+import { inngest } from "../Inngest/inngest.js";
 
 const checkSeatAvailability = async (showId, selectedSeats) => {
     try {
@@ -69,6 +70,13 @@ const createBooking = AsyncHandler(async (req, res) => {
 
     booking.paymentLink = session?.url;
     await booking.save();
+
+    await inngest.send({
+        name: "app/checkpayment",
+        data: {
+            bookingId: booking._id.toString()
+        }
+    });
 
     return res
         .status(201)
