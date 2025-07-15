@@ -8,7 +8,7 @@ import { useAppContext } from "../../context/AppContext";
 
 const NowShowingSection = () => {
   const { nowPlayingMovies, image_base_url, genreMap,shows,movies } = useAppContext();
-  console.log("From Now Playing section\n ", shows);
+ 
   
   return (
     <div className="px-6 md:px-16 lg:px-20 overflow-hidden">
@@ -17,7 +17,7 @@ const NowShowingSection = () => {
         <BlurCircle top="0" left="-100px" />
         <p className="text-gray-300 font-medium text-lg">Now Showing</p>
       </div>
-      <div className="flex flex-col items-center justify-center gap-5 md:flex-row md:flex-wrap my-4">
+      <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:flex-wrap my-4">
         {shows.slice(0,6).map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
