@@ -21,7 +21,6 @@ const MyBookings = () => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      
 
       if (data.success) setBookings(data.data);
     } catch (error) {
@@ -47,10 +46,7 @@ const MyBookings = () => {
         {bookings.map((booking) => (
           <motion.div
             key={booking._id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="group relative overflow-hidden bg-primary-700/5 border border-primary-700/20 rounded-xl p-5 backdrop-blur-md transition-shadow hover:shadow-xl"
+            className="relative overflow-hidden bg-primary-700/5 border border-primary-700/20 rounded-xl p-5 backdrop-blur-md transition-shadow hover:shadow-xl"
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <img
@@ -93,8 +89,8 @@ const MyBookings = () => {
                 <span className="text-xl font-bold ">${booking.amount}</span>
                 {!booking.isPaid && (
                   <Link
-                    to={booking.paymentLink}
-                    className="px-4 py-2 text-sm bg-primary-700 hover:bg-primary-400 rounded-full transition shadow-md cursor-pointer"
+                    to={booking?.paymentLink}
+                    className="px-4 py-2 text-sm bg-primary-700 hover:bg-primary-500 rounded-full transition shadow-md cursor-pointer"
                   >
                     Pay Now
                   </Link>
@@ -102,12 +98,7 @@ const MyBookings = () => {
               </div>
             </div>
 
-            {/* Interactive glow effect */}
-            <motion.div
-              className="absolute top-0 left-0 w-full h-full bg-primary-700/5 rounded-xl opacity-0 group-hover:opacity-100 transition"
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 0.15 }}
-            />
+          
           </motion.div>
         ))}
       </div>

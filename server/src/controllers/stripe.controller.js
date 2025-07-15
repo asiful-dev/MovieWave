@@ -5,56 +5,53 @@ import Booking from "../models/booking.models.js";
 import ApiResponse from "../utils/ApiResponse.js";
 
 
-
-const stripeWebHooks = AsyncHandler(async (req, res) => {
+const stripeWebHooks = async (req, res) => {
     const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
     const signature = req.headers["stripe-signature"];
 
     let event;
+
     try {
-        event = stripeInstance.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRETF);
-
-
+        event = stripeInstance.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET)
     } catch (error) {
-        throw new ApiError(400, `Stripe Webhook Error: ${error.message}`)
+        console.error(`Webhook Error: ${error.message}`);
+        return response.status(400).send(`Webhook Error: ${error.message}`);
     }
+
     try {
         switch (event.type) {
             case "payment_intent.succeeded": {
                 const paymentIntent = event.data.object;
-                const sessionList = await stripeInstance.checked.sessions.list({
-                    paymentIntent: paymentIntent.id
+                const sessionList = await stripeInstance.checkout.sessions.list({
+                    payment_intent: paymentIntent.id
                 })
-
                 const session = sessionList.data[0];
                 const { bookingId } = session.metadata;
 
-                const updatedBooking = await Booking.findByIdAndUpdate(bookingId, {
-                    isPaid: true,
-                    paymentLink: ""
-                })
-                if (!updatedBooking) throw new ApiError(404, "Booking Not Found");
-            }
+                await Booking.findByIdAndUpdate(
+                    bookingId,
+                    {
+                        isPaid: true,
+                        paymentLink: ""
+                    },
+                    { new: true }
+                )
+
                 break;
+            }
 
             default:
-                console.log("Unhandled Event Type: ", event.type);
+                console.log("Unhandled Event Type ", event.type);
 
         }
-        return res
-            .status(200)
-            .json(
-                new ApiResponse(
-                    200,
-                    "Webhook processed successfully",
-                    {}
-                )
-            );
+
+        res.json({ received: true })
+
     } catch (error) {
         console.error("Webhook Processing Error ", error);
-        throw new ApiError(500, "Stripe Interval Sever Error");
+        res.status(500).send("Internal Server Error")
 
     }
-})
+}
 
 export default stripeWebHooks;
