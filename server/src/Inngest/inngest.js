@@ -103,7 +103,7 @@ const sendBookingConfirmationEmail = inngest.createFunction(
             path: "show",
             populate: {
                 path: "movie",
-                model: "movie"
+                model: "Movie"
             }
         }).populate("user")
 
