@@ -8,8 +8,13 @@ import {
 import { assests } from "../../assets/assests";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAppContext } from "../../context/AppContext";
 
 const AdminSidebar = () => {
+  const {user}=useAppContext();
+  console.log("user \n",user);
+  console.log("user name \n",user.fullName);
+  
   const adminNavLinks = [
     { name: "Dashboard", path: "/admin", icon: LayoutDashboardIcon },
     { name: "Add Shows", path: "/admin/add-shows", icon: PlusSquareIcon },
@@ -29,12 +34,12 @@ const AdminSidebar = () => {
         transition={{ delay: 0.1 }}
       >
         <img
-          src={assests.profile}
+          src={user?.imageUrl || "/placeholder.png"}
           alt="admin profile"
-          className="h-10 md:h-16 w-10 md:w-16 rounded-full mx-auto border-2 border-primary-400 shadow p-2"
+          className="h-10 md:h-16 w-10 md:w-16 rounded-full mx-auto shadow"
         />
         <p className="mt-3 text-sm font-medium text-primary-300 max-md:hidden text-center">
-          Admin
+          {user.fullName}
         </p>
       </motion.div>
 

@@ -37,10 +37,19 @@ const MovieCard = ({ movie }) => {
             {movie.release_date}
           </span>
           <span className="flex items-center gap-1">
-            {movie.genres
-              .slice(0, 2)
-              .map((genre) => genre.name)
-              .join(", ")}
+            {
+              movie.genres
+                ? movie.genres
+                    .slice(0, 2)
+                    .map((genre) => genre.name)
+                    .join(", ")
+                : movie.genre_ids
+                ? movie.genre_ids
+                    .slice(0, 2)
+                    .map((id) => genreMap[id])
+                    .join(", ")
+                : ""
+            }
           </span>
         </div>
 
@@ -53,7 +62,7 @@ const MovieCard = ({ movie }) => {
             <Button
               className="px-4 py-1.5 rounded-full text-xs font-medium hover:bg-primary-700/60 transition"
               onClick={() => {
-                navigate(`/movies/${movie.id}`);
+                navigate(`/movies/${movie._id}`);
                 scrollTo(0, 0);
               }}
             >

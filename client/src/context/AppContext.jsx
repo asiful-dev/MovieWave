@@ -96,7 +96,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchShows();
-    fetchMovies();
+    // fetchMovies();
     fetchNowPlayingMovies();
     fetchUpcomingMovies();
   }, []);

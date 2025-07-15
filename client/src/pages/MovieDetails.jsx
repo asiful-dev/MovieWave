@@ -199,7 +199,7 @@ const MovieDetails = () => {
       </section>
 
       {Object.keys(show[1]).length > 0 && (
-        <DateSelect id={show[0].id} dateTime={show[1]} />
+        <DateSelect id={show[0]._id} dateTime={show[1]} />
       )}
 
       <section className="mt-20">

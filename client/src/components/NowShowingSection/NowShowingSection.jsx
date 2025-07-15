@@ -8,7 +8,7 @@ import { useAppContext } from "../../context/AppContext";
 
 const NowShowingSection = () => {
   const { nowPlayingMovies, image_base_url, genreMap,shows,movies } = useAppContext();
-  // console.log("From Now Playing section\n movies ", movies);
+  console.log("From Now Playing section\n ", shows);
   
   return (
     <div className="px-6 md:px-16 lg:px-20 overflow-hidden">

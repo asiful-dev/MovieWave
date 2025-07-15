@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import toast from "react-hot-toast";
 import Title from "../../components/admin/Title";
 import { useEffect } from "react";
+import { ClipLoader } from "react-spinners";
 
 const AddShows = () => {
   const { image_base_url, nowPlayingMovies, axios, getToken, user } =
@@ -76,13 +77,13 @@ const AddShows = () => {
         Object.keys(dateTimeSelection).length === 0 ||
         !selectedMovieId
       ) {
+        setIsAddingShow(false);
         return toast.error(
           "Please select a movie, enter show price and select at least one date-time."
         );
       }
 
       // Convert dateTimeSelection object to array of { date, time } objects
-      // This is the corrected part
       const showsInput = Object.entries(dateTimeSelection).map(
         ([date, times]) => ({ date, time: times })
       );
@@ -94,7 +95,7 @@ const AddShows = () => {
         showPrice: Number(showPrice),
       };
 
-      const { data } = await axios.post("/show/add", payload, { // Added /api as per the controller
+      const { data } = await axios.post("/show/add", payload, {
         headers: {
           Authorization: `Bearer ${await getToken()}`,
         },
@@ -110,8 +111,9 @@ const AddShows = () => {
     } catch (error) {
       console.error("Submission error ", error);
       toast.error("An error occurred. Please try again");
+    } finally {
+      setIsAddingShow(false);
     }
-    setIsAddingShow(false);
   };
 
   return (
@@ -236,8 +238,13 @@ const AddShows = () => {
           <Button
             onClick={handleSubmit}
             className="bg-primary-700 px-6 py-2 rounded-lg text-white font-semibold hover:bg-primary-800 transition"
+            disabled={isAddingShow}
           >
-            Add Show
+            {isAddingShow ? (
+              <ClipLoader color="#fff" size={20} /> // Display loader when adding
+            ) : (
+              "Add Show" // Display text when not adding
+            )}
           </Button>
         </div>
       </div>

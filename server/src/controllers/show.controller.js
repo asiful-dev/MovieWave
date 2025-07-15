@@ -140,7 +140,7 @@ const addShow = AsyncHandler(async (req, res) => {
         );
 });
 
-const getAllShows = AsyncHandler(async (req, res) => {
+const getAllShows = AsyncHandler(async ( _, res) => {
     const shows = await Show.find({}).populate("movie").sort({ showDateTime: 1 });
     
     const uniqueShows = new Set(shows.map(show => show.movie));

@@ -31,17 +31,10 @@ const SeatLayout = () => {
 
   const getShow = async () => {
     try {
-      const movieRes = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}`,
-        options
-      );
-
-      setShow({
-        movie: movieRes.data,
-        dateTime: dummyDateTimeData,
-      });
+      const { data } = await axios.get(`/show/${id}`);
+      if (data.success) setShow(data.data);
     } catch (error) {
-      console.error("Error fetching movie details:", error);
+      console.error(error);
     }
   };
   function handleSeatClick(seatId) {
@@ -103,7 +96,7 @@ const SeatLayout = () => {
       <div className="w-60 bg-primary-700/10 border border-primary-700/20 rounded-lg py-10 h-max md:sticky md:top-30">
         <p className="text-lg font-semibold px-6">Available Timings</p>
         <div className="mt-5 space-y-1">
-          {show.dateTime[date].map((item) => (
+          {show[1][date].map((item) => (
             <div
               key={item.time}
               onClick={() => setSelectedTime(item)}
@@ -127,10 +120,9 @@ const SeatLayout = () => {
         <h1 className="text-2xl font-semibold mb-4">Select Your Seat</h1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="585"
-          height="29"
           viewBox="0 0 585 29"
           fill="none"
+          className="w-full h-auto max-w-[600px] animate-pulse"
         >
           <path
             d="M585 29V17C585 17 406.824 0 292.5 0C178.176 0 0 17 0 17V29C0 29 175.5 12 292.5 12C404.724 12 585 29 585 29Z"

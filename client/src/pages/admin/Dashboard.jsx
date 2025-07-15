@@ -1,12 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { Armchair, DollarSignIcon, UserCircleIcon } from "lucide-react";
-
-import KeyMetricsCards from "../../components/KeyMetricsCards";
 import { dummyDashboardData } from "../../assets/assests";
-import RevenueChart from "../../components/Charts/RevenueChart";
-import SeatPieChart from "../../components/Charts/SeatPieChart";
 import { useAppContext } from "../../context/AppContext";
 import MovieCard from "../../components/MovieCard";
+import KeyMetricsCards from "../../components/KeyMetricsCards"
 
 const Dashboard = () => {
   const { nowPlayingMovies } = useAppContext();
