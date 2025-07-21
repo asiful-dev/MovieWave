@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     <>
       {/* key metrics card */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <KeyMetricsCards
           title={"Total Bookings"}
           data={dummyDashboardData.totalBookings.toLocaleString()}
@@ -31,7 +31,7 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {nowPlayingMovies.slice(0, 3).map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}

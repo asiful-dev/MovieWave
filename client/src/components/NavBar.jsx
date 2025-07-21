@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { assests } from "../assets/assests.js";
 import { Link, useNavigate } from "react-router-dom";
-import { MenuIcon, TicketPlus, XIcon } from "lucide-react";
+import {
+  MenuIcon,
+  ShieldUser,
+  ShieldUserIcon,
+  TicketPlus,
+  XIcon,
+} from "lucide-react";
 import Button from "./Button.jsx";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { useAppContext } from "../context/AppContext.jsx";
 
 const NavBar = () => {
+  const { isAdmin } = useAppContext();
   const navItems = ["Home", "Movies", "Theaters", "Releases", "Favourites"];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useUser();
@@ -44,7 +52,6 @@ const NavBar = () => {
       </div>
 
       <div className="hidden ml-14 md:flex items-center gap-4">
-
         {/* Login Button */}
         {!user ? (
           <Button
@@ -63,13 +70,24 @@ const NavBar = () => {
                 label="My Bookings"
                 labelIcon={<TicketPlus className="w-[1rem]" />}
               />
+
+              {isAdmin && (
+                <UserButton.Action
+                  onClick={() => navigate("/admin")}
+                  label="Admin Panel"
+                  labelIcon={<ShieldUserIcon className="w-[1rem]" />}
+                />
+              )}
             </UserButton.MenuItems>
           </UserButton>
         )}
       </div>
 
-      <button onClick={toggleMobileMenu} className="md:hidden text-white bg-white/20 p-4 rounded-lg">
-        <MenuIcon/>
+      <button
+        onClick={toggleMobileMenu}
+        className="md:hidden text-white bg-white/20 p-4 rounded-lg"
+      >
+        <MenuIcon />
       </button>
 
       {/* MOBILE MENU */}
@@ -119,6 +137,13 @@ const NavBar = () => {
                         label="My Bookings"
                         labelIcon={<TicketPlus className="w-[1rem]" />}
                       />
+                      {isAdmin && (
+                        <UserButton.Action
+                          onClick={() => navigate("/admin")}
+                          label="Admin Panel"
+                          labelIcon={<ShieldUserIcon className="w-[1rem]" />}
+                        />
+                      )}
                     </UserButton.MenuItems>
                   </UserButton>
                 </div>
@@ -133,6 +158,16 @@ const NavBar = () => {
                 >
                   My Bookings
                 </Button>
+                {isAdmin && (
+                  <Button
+                    onClick={() => navigate("/admin")}
+                    className="px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md bg-white/10 border border-white/20 hover:bg-white/20"
+                    bgColor=""
+                    textColor="text-white"
+                  >
+                    Admin Panel
+                  </Button>
+                )}
               </div>
             )}
           </div>
@@ -150,8 +185,6 @@ const NavBar = () => {
               </Link>
             ))}
           </div>
-
-          
         </div>
       )}
     </nav>

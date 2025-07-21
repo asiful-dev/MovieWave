@@ -7,7 +7,7 @@ import BlurCircle from "../../components/BlurCricle";
 import { useAppContext } from "../../context/AppContext";
 
 const AdminLayout = () => {
-  const { isAdmin, fetchIsAdmin, user } = useAppContext();
+  const { isAdmin } = useAppContext();
 
 
   return isAdmin ? (

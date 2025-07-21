@@ -51,8 +51,7 @@ const AppProvider = ({ children }) => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      console.log(data?.data);
-      console.log(data?.data?.isAdmin);
+     
 
       const isTheUserAdmin = data?.data?.isAdmin;
       setIsAdmin(isTheUserAdmin);
