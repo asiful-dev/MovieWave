@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { assests } from "../assets/assests.js";
 import { Link, useNavigate } from "react-router-dom";
-import { TicketPlus, XIcon } from "lucide-react";
+import { MenuIcon, TicketPlus, XIcon } from "lucide-react";
 import Button from "./Button.jsx";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 
@@ -18,7 +18,6 @@ const NavBar = () => {
 
   return (
     <nav className="flex items-center justify-between w-full px-6 py-2 rounded-full text-white text-sm fixed top-0 left-0 z-50 bg-transparent">
-      
       <Link to="/">
         <img
           src={assests.favicon}
@@ -46,9 +45,8 @@ const NavBar = () => {
 
       <div className="hidden ml-14 md:flex items-center gap-4">
         <Button
-          className="border border-slate-600  px-4 py-2 rounded-full text-sm font-medium transition"
+          className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition"
           bgColor="bg-white/10"
-          hoverColor="bg-slate-800"
           textColor="text-white"
         >
           Contact
@@ -58,9 +56,8 @@ const NavBar = () => {
         {!user ? (
           <Button
             onClick={openSignIn}
-            className="px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-primary-700/60 shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
             bgColor="bg-primary-700"
-            hoverColor="bg-primary-700/60"
             textColor="text-white"
           >
             Login
@@ -71,30 +68,20 @@ const NavBar = () => {
               <UserButton.Action
                 onClick={() => navigate("/my-bookings")}
                 label="My Bookings"
-                labelIcon={<TicketPlus className="w-[1rem]"/>}
+                labelIcon={<TicketPlus className="w-[1rem]" />}
               />
             </UserButton.MenuItems>
           </UserButton>
         )}
       </div>
 
-      <button onClick={toggleMobileMenu} className="md:hidden text-white">
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+      <button onClick={toggleMobileMenu} className="md:hidden text-white bg-white/20 p-4 rounded-lg">
+        <MenuIcon/>
       </button>
 
       {/* MOBILE MENU */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-black/70 backdrop-blur-lg px-6 py-10">
+        <div className="fixed inset-0 z-50 flex flex-col items-center bg-black/70 backdrop-blur-lg px-6 py-10">
           <button
             onClick={toggleMobileMenu}
             className="absolute top-6 right-6 text-white"
@@ -102,35 +89,83 @@ const NavBar = () => {
             <XIcon className="w-6 h-6" />
           </button>
 
-          {navItems.map((item) => (
-            <Link
-              key={item}
-              to={`/${item.toLowerCase()}`}
-              onClick={toggleMobileMenu}
-              className="text-white text-lg font-medium hover:text-blue-400 transition"
-            >
-              {item}
-            </Link>
-          ))}
+          {/* User Profile Section - Top Emphasis */}
+          <div className="flex flex-col items-center gap-4 mt-8 mb-12">
+            {!user ? (
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/20">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+                <Button
+                  onClick={openSignIn}
+                  className="px-8 py-3 rounded-full text-base font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-primary-700/60 shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  bgColor="bg-primary-700"
+                  textColor="text-white"
+                >
+                  Login
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-3">
+                <div className="scale-150 mb-2">
+                  <UserButton>
+                    <UserButton.MenuItems>
+                      <UserButton.Action
+                        onClick={() => navigate("/my-bookings")}
+                        label="My Bookings"
+                        labelIcon={<TicketPlus className="w-[1rem]" />}
+                      />
+                    </UserButton.MenuItems>
+                  </UserButton>
+                </div>
+                <p className="text-white text-lg font-medium">
+                  {user.fullName || user.username || "User"}
+                </p>
+                <Button
+                  onClick={() => navigate("/my-bookings")}
+                  className="px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md bg-white/10 border border-white/20 hover:bg-white/20"
+                  bgColor=""
+                  textColor="text-white"
+                >
+                  My Bookings
+                </Button>
+              </div>
+            )}
+          </div>
 
-          <div className="mt-4 flex flex-col items-center gap-3 w-36 px-4">
+          {/* Navigation Items */}
+          <div className="flex flex-col items-center gap-6 mb-8">
+            {navItems.map((item) => (
+              <Link
+                key={item}
+                to={`/${item.toLowerCase()}`}
+                onClick={toggleMobileMenu}
+                className="text-white text-xl font-medium hover:text-blue-400 transition capitalize tracking-wide"
+              >
+                {item}
+              </Link>
+            ))}
+          </div>
+
+          {/* Contact Button */}
+          <div className="mt-auto">
             <Button
-              className="w-36 bg-black border border-black px-4 py-2 rounded-full text-sm font-medium transition"
+              className="w-40 bg-white/10 border border-white/20 hover:bg-white/20 px-6 py-3 rounded-full text-base font-medium transition"
               bgColor=""
-              hoverColor=""
               textColor="text-white"
             >
               Contact
-            </Button>
-
-            {/* Login Button */}
-            <Button
-              className="w-36 px-6 py-2 rounded-full text-sm font-medium transition duration-300 transform hover:-translate-y-1 hover:shadow-md shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              bgColor="bg-primary-700"
-              hoverColor="bg-primary-700/60"
-              textColor="text-white"
-            >
-              Login
             </Button>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import { useAppContext } from "../../context/AppContext";
 
 const NowShowingSection = () => {
-  const { nowPlayingMovies, image_base_url, genreMap,shows,movies } = useAppContext();
+  const {shows} = useAppContext();
  
   
   return (

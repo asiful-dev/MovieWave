@@ -35,7 +35,7 @@ const MovieDetails = () => {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
       
       if (data) setRecommendations(data.results.slice(0,4));
     } catch (error) {
