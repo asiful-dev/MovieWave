@@ -3,15 +3,19 @@ import AsyncHandler from "../utils/AsyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 
 const protectAdmin = AsyncHandler(async (req, _, next) => {
-    const { userId } = req.auth();
-    const user = await clerkClient.users.getUser(userId);
+    try {
+        const { userId } = req.auth();
+        const user = await clerkClient.users.getUser(userId);
 
-    if (!user) throw new ApiError(404, "User Not Found");
-    
-    if (user.privateMetadata.role !== "admin")
-        throw new ApiError(401, "Not Authorized")
+        if (!user) throw new ApiError(404, "User Not Found");
 
-    next();
+        if (user.privateMetadata.role !== "admin")
+            throw new ApiError(401, "Not Authorized")
+
+        next();
+    } catch (error) {
+        throw new ApiError(401, "Not Authorized");
+    }
 })
 
 export default protectAdmin;

@@ -4,6 +4,7 @@ import { getAllBookings, getDashBoardData, isAdmin } from "../controllers/admin.
 
 const adminRouter = Router();
 
+adminRouter.use(protectAdmin);
 // adminRouter.use(protectAdmin);
 adminRouter.route("/is-admin").get(isAdmin);
 adminRouter.route("/dashboard").get(getDashBoardData);

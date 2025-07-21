@@ -51,7 +51,7 @@ const AppProvider = ({ children }) => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-
+      console.log(data?.data);
       console.log(data?.data?.isAdmin);
 
       const isTheUserAdmin = data?.data?.isAdmin;
@@ -63,6 +63,11 @@ const AppProvider = ({ children }) => {
       }
     } catch (error) {
       console.error(error);
+      setIsAdmin(false);
+      if (location.pathname.startsWith("/admin")) {
+        navigate("/");
+        toast.error("You are not authorized to access admin dashboard");
+      }
     }
   };
 
@@ -100,15 +105,21 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchShows();
-
     fetchNowPlayingMovies();
     fetchUpcomingMovies();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchIsAdmin();
+    }
+  }, [user, location]);
 
   const value = {
     axios,
     user,
     navigate,
+    fetchIsAdmin,
     image_base_url,
     nowPlayingMovies,
     upcomingMovies,

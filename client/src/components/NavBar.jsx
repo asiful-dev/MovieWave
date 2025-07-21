@@ -44,13 +44,6 @@ const NavBar = () => {
       </div>
 
       <div className="hidden ml-14 md:flex items-center gap-4">
-        <Button
-          className="border border-slate-600 hover:bg-slate-800 px-4 py-2 rounded-full text-sm font-medium transition"
-          bgColor="bg-white/10"
-          textColor="text-white"
-        >
-          Contact
-        </Button>
 
         {/* Login Button */}
         {!user ? (
@@ -158,16 +151,7 @@ const NavBar = () => {
             ))}
           </div>
 
-          {/* Contact Button */}
-          <div className="mt-auto">
-            <Button
-              className="w-40 bg-white/10 border border-white/20 hover:bg-white/20 px-6 py-3 rounded-full text-base font-medium transition"
-              bgColor=""
-              textColor="text-white"
-            >
-              Contact
-            </Button>
-          </div>
+          
         </div>
       )}
     </nav>

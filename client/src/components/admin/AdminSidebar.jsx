@@ -5,16 +5,13 @@ import {
   ListIcon,
   PlusSquareIcon,
 } from "lucide-react";
-import { assests } from "../../assets/assests";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAppContext } from "../../context/AppContext";
 
 const AdminSidebar = () => {
-  const {user}=useAppContext();
-  console.log("user \n",user);
-  console.log("user name \n",user.fullName);
-  
+  const { user } = useAppContext();
+
   const adminNavLinks = [
     { name: "Dashboard", path: "/admin", icon: LayoutDashboardIcon },
     { name: "Add Shows", path: "/admin/add-shows", icon: PlusSquareIcon },
