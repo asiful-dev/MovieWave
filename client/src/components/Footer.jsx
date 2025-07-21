@@ -1,24 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { 
-  Instagram, 
-  Twitter, 
-  Youtube, 
-  Linkedin, 
-  MapPin, 
-  Phone, 
+import {
+  Instagram,
+  Twitter,
+  Youtube,
+  Linkedin,
+  MapPin,
+  Phone,
   Mail,
   Film,
   Ticket,
   Users,
   ArrowUp,
-  ExternalLink
+  ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const footerLinks = {
@@ -26,39 +26,55 @@ const Footer = () => {
       { label: "About Us", href: "/about" },
       { label: "Careers", href: "/careers" },
       { label: "Press", href: "/press" },
-      { label: "Blog", href: "/blog" }
+      { label: "Blog", href: "/blog" },
     ],
     services: [
       { label: "Movie Tickets", href: "/movies" },
       { label: "Gift Cards", href: "/gift-cards" },
       { label: "Group Bookings", href: "/group-bookings" },
-      { label: "Private Screenings", href: "/private-screenings" }
+      { label: "Private Screenings", href: "/private-screenings" },
     ],
     support: [
       { label: "Help Center", href: "/help" },
       { label: "Contact Us", href: "/contact" },
       { label: "Terms of Service", href: "/terms" },
-      { label: "Privacy Policy", href: "/privacy" }
-    ]
+      { label: "Privacy Policy", href: "/privacy" },
+    ],
   };
 
   const contactInfo = [
     { icon: Phone, label: "+1 (555) 123-4567", href: "tel:+15551234567" },
-    { icon: Mail, label: "hello@moviewave.com", href: "mailto:hello@moviewave.com" },
-    { icon: MapPin, label: "123 Cinema Street, Movie City, MC 12345", href: "#" }
+    {
+      icon: Mail,
+      label: "hello@moviewave.com",
+      href: "mailto:hello@moviewave.com",
+    },
+    {
+      icon: MapPin,
+      label: "123 Cinema Street, Movie City, MC 12345",
+      href: "#",
+    },
   ];
 
   const socialLinks = [
-    { icon: Instagram, href: "https://instagram.com/moviewave", label: "Instagram" },
+    {
+      icon: Instagram,
+      href: "https://instagram.com/moviewave",
+      label: "Instagram",
+    },
     { icon: Twitter, href: "https://twitter.com/moviewave", label: "Twitter" },
     { icon: Youtube, href: "https://youtube.com/moviewave", label: "YouTube" },
-    { icon: Linkedin, href: "https://linkedin.com/company/moviewave", label: "LinkedIn" }
+    {
+      icon: Linkedin,
+      href: "https://linkedin.com/company/moviewave",
+      label: "LinkedIn",
+    },
   ];
 
   const stats = [
     { icon: Film, value: "10K+", label: "Movies" },
     { icon: Ticket, value: "1M+", label: "Tickets Sold" },
-    { icon: Users, value: "500K+", label: "Happy Customers" }
+    { icon: Users, value: "500K+", label: "Happy Customers" },
   ];
 
   return (
@@ -82,14 +98,11 @@ const Footer = () => {
         transition={{ duration: 0.8 }}
         className="w-full bg-gradient-to-b from-[#0c1f33] via-[#153456] to-[#0d355d] text-white/80 mt-20 overflow-hidden"
       >
-       
-
         {/* Main Footer Content */}
         <div className="px-4 sm:px-6 md:px-12 py-12 sm:py-16">
           <div className="max-w-7xl mx-auto">
             {/* Mobile-First Layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-              
               {/* Brand Section */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -106,8 +119,8 @@ const Footer = () => {
                 />
 
                 <p className="text-sm sm:text-base text-white/60 mb-6 leading-relaxed max-w-sm mx-auto md:mx-0">
-                  Experience movies like never before. Secure seats. Seamless booking. 
-                  Stay entertained with us.
+                  Experience movies like never before. Secure seats. Seamless
+                  booking. Stay entertained with us.
                 </p>
 
                 {/* Social Links */}
@@ -123,7 +136,10 @@ const Footer = () => {
                       whileTap={{ scale: 0.95 }}
                       className="p-2.5 bg-white/10 hover:bg-blue-600/30 rounded-full transition-colors duration-300 group"
                     >
-                      <social.icon size={18} className="text-white group-hover:text-blue-300" />
+                      <social.icon
+                        size={18}
+                        className="text-white group-hover:text-blue-300"
+                      />
                     </motion.a>
                   ))}
                 </div>
@@ -139,8 +155,11 @@ const Footer = () => {
                   className="text-center md:text-left"
                 >
                   <h4 className="text-white font-semibold text-sm sm:text-base mb-4 capitalize">
-                    {category === 'company' ? 'Company' : 
-                     category === 'services' ? 'Services' : 'Support'}
+                    {category === "company"
+                      ? "Company"
+                      : category === "services"
+                      ? "Services"
+                      : "Support"}
                   </h4>
                   <ul className="space-y-2 sm:space-y-3">
                     {links.map((link, linkIndex) => (
@@ -159,26 +178,27 @@ const Footer = () => {
               ))}
             </div>
 
-            {/* Contact Information - Mobile Optimized */}
+            {/* Contact Information - Mobile & Tablet Optimized */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
               className="mt-12 pt-8 border-t border-white/10"
             >
-              <h4 className="text-white font-semibold text-base mb-4 text-center md:text-left">
+              <h4 className="text-white font-semibold text-base mb-6 text-center md:text-left">
                 Get In Touch
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+              <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                 {contactInfo.map((contact, index) => (
                   <motion.a
                     key={index}
                     href={contact.href}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 rounded-lg transition-colors duration-300 text-center sm:text-left"
+                    className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3 p-4 bg-white/5 hover:bg-white/10 rounded-lg transition-colors duration-300 text-white group"
                   >
-                    <contact.icon className="w-4 h-4 text-blue-400 flex-shrink-0 mx-auto sm:mx-0" />
-                    <span className="text-sm text-white/60 hover:text-white transition-colors">
+                    <contact.icon className="w-5 h-5 text-blue-400" />
+                    <span className="text-sm text-white/60 group-hover:text-white text-center sm:text-left">
                       {contact.label}
                     </span>
                   </motion.a>
@@ -199,7 +219,7 @@ const Footer = () => {
             <p className="text-xs sm:text-sm text-white/40 text-center sm:text-left">
               &copy; 2025{" "}
               <a
-                href="https://prebuiltui.com"
+                href="https://movie-wave-red.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white underline underline-offset-2 transition-colors duration-300"
@@ -208,38 +228,29 @@ const Footer = () => {
               </a>
               . All rights reserved.
             </p>
-            
+
             <div className="flex items-center gap-4 text-xs text-white/40">
-              <Link to="/sitemap" className="hover:text-white transition-colors">
+              <Link
+                to="/sitemap"
+                className="hover:text-white transition-colors"
+              >
                 Sitemap
               </Link>
               <span>•</span>
-              <Link to="/accessibility" className="hover:text-white transition-colors">
+              <Link
+                to="/accessibility"
+                className="hover:text-white transition-colors"
+              >
                 Accessibility
               </Link>
               <span>•</span>
-              <Link to="/cookies" className="hover:text-white transition-colors">
+              <Link
+                to="/cookies"
+                className="hover:text-white transition-colors"
+              >
                 Cookies
               </Link>
             </div>
-          </div>
-        </motion.div>
-
-        {/* Mobile Stats - Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="sm:hidden bg-white/5 px-4 py-6"
-        >
-          <div className="grid grid-cols-3 gap-4 text-center">
-            {stats.map((stat, index) => (
-              <div key={index} className="flex flex-col items-center gap-1">
-                <stat.icon className="w-5 h-5 text-blue-400" />
-                <span className="text-sm font-bold text-white">{stat.value}</span>
-                <span className="text-xs text-white/60">{stat.label}</span>
-              </div>
-            ))}
           </div>
         </motion.div>
       </motion.footer>

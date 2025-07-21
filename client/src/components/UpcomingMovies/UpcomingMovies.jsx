@@ -23,7 +23,7 @@ const UpcomingMovies = () => {
             Upcoming Releases
           </h2>
           <p className="text-sm sm:text-base text-gray-400">
-            Don't miss these highly anticipated movies
+            Don't miss these highly anticipated movies ❗
           </p>
         </div>
 
@@ -55,10 +55,10 @@ const UpcomingMovies = () => {
         modules={[Autoplay]}
         className="w-full !overflow-visible"
       >
-        {upcomingMovies.map((movie, index) => (
+        {upcomingMovies.slice(0,9).map((movie, index) => (
           <SwiperSlide key={movie.id}>
             <div className="group cursor-pointer">
-              <div className="h-auto relative bg-gray-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-blue-500/20">
+              <div className="md:h-[30rem] relative bg-gray-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-blue-500/20">
                 {/* Movie Poster */}
                 <div className="relative overflow-hidden">
                   <img
