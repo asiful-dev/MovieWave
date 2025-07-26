@@ -3,13 +3,16 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import BlurCircle from "./BlurCricle";
-import Button from "./Button"
+import Button from "./Button";
+import { useAppContext } from "../context/AppContext";
 const DateSelect = ({ dateTime, id }) => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(null);
+  const { user } = useAppContext();
 
   const onBookHandler = () => {
     if (!selected) return toast.error("Please select a date");
+    if (!user) return toast.error("Please Login To Proceed");
     navigate(`/movies/${id}/${selected}`);
     scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -22,7 +25,9 @@ const DateSelect = ({ dateTime, id }) => {
 
       <div className="flex flex-col justify-between items-center lg:flex-row  gap-10">
         <div className="flex-1">
-          <h2 className="text-xl font-bold text-primary-300 mb-4">Choose Date</h2>
+          <h2 className="text-xl font-bold text-primary-300 mb-4">
+            Choose Date
+          </h2>
           <div className="flex items-center gap-6 overflow-x-auto no-scrollbar text-sm">
             <ChevronLeftIcon className="min-w-[24px]" />
             <div className="flex gap-4">

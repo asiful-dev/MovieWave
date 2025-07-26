@@ -3,6 +3,7 @@ import ApiResponse from "../utils/ApiResponse.js"
 import Booking from "../models/booking.models.js"
 import Show from "../models/show.models.js"
 import User from "../models/user.models.js"
+import ApiError from "../utils/ApiError.js"
 
 
 
@@ -59,8 +60,8 @@ const getDashBoardData = AsyncHandler(async (req, res) => {
 })
 
 const getAllBookings = AsyncHandler(async (req, res) => {
-    const bookings=await Booking.find({})
-        .populate("users")
+    const bookings = await Booking.find({})
+        .populate("user")
         .populate({
             path: "show",
             populate: {
@@ -69,23 +70,41 @@ const getAllBookings = AsyncHandler(async (req, res) => {
         })
         .sort({ createdAt: -1 })
 
-        if (!bookings) {
-            throw new ApiError(404, "No bookings found");
-        }
+    if (!bookings) {
+        throw new ApiError(404, "No bookings found");
+    }
 
-        return res
-            .status(200)
-            .json(
-                new ApiResponse(
-                    200,
-                    "All bookings fetched successfully!",
-                    bookings
-                )
-            );
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                "All bookings fetched successfully!",
+                bookings
+            )
+        );
+})
+
+
+const getAllShows = AsyncHandler(async (req, res) => {
+    const shows = await Show.find({});
+    if (!shows) throw new ApiError(404, "No Shows Found!");
+    console.log(shows);
+    
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                "All Shows Fetched Successfully!",
+                shows
+            )
+        )
 })
 
 export {
     isAdmin,
     getDashBoardData,
-    getAllBookings
+    getAllBookings,
+    getAllShows
 }

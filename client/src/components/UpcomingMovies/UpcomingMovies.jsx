@@ -27,13 +27,7 @@ const UpcomingMovies = () => {
           </p>
         </div>
 
-        {/* Optional: View All link */}
-        <Link
-          to="/upcoming"
-          className="hidden sm:flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
-        >
-          View All <ArrowRight className="w-4 h-4" />
-        </Link>
+       
       </div>
 
       <Swiper
@@ -126,15 +120,8 @@ const UpcomingMovies = () => {
         ))}
       </Swiper>
 
-      {/* Mobile View All button */}
-      <div className="flex sm:hidden justify-center mt-6">
-        <Link
-          to="/upcoming"
-          className="bg-blue-600/20 hover:bg-blue-600/30 backdrop-blur-sm text-blue-300 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 border border-blue-600/30"
-        >
-          View All Movies <ArrowRight className="w-4 h-4" />
-        </Link>
-      </div>
+     
+   
     </section>
   );
 };

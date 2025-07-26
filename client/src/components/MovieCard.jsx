@@ -85,18 +85,7 @@ const MovieCard = ({ movie, index = 0, size = "default" }) => {
           </motion.div>
         )}
 
-        {/* Favorite button */}
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={toggleFavorite}
-          className="absolute top-2 left-2 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-colors duration-300 sm:opacity-0 sm:group-hover:opacity-100"
-        >
-          <HeartIcon
-            className={`w-4 h-4 transition-colors duration-300 ${
-              isFavorite ? "fill-red-500 text-red-500" : "text-white"
-            }`}
-          />
-        </motion.button>
+      
 
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />

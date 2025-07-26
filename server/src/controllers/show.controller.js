@@ -61,15 +61,15 @@ const addShow = AsyncHandler(async (req, res) => {
         try {
             movieDetailsResponse = await apiGet(`/movie/${movieId}`);
             movieCreditsResponse = await apiGet(`/movie/${movieId}/credits`);
-        } catch (err) { 
+        } catch (err) {
             throw new ApiError(500, "Failed to fetch movie details from TMDB");
         }
 
         const movieApiData = movieDetailsResponse;
         const movieCreditsData = movieCreditsResponse;
 
-        
-        
+
+
         const movieDetails = {
             _id: movieId,
             title: movieApiData.title,
@@ -140,9 +140,9 @@ const addShow = AsyncHandler(async (req, res) => {
         );
 });
 
-const getAllShows = AsyncHandler(async ( _, res) => {
+const getAllShows = AsyncHandler(async (_, res) => {
     const shows = await Show.find({}).populate("movie").sort({ showDateTime: 1 });
-    
+
     const uniqueShows = new Set(shows.map(show => show.movie));
 
     return res
@@ -165,7 +165,7 @@ const getSingleShow = AsyncHandler(async (req, res) => {
     if (!singleMovie) {
         throw new ApiError(404, "Movie not found");
     }
-    const shows = await Show.find({ movie: movieId});
+    const shows = await Show.find({ movie: movieId });
 
     const dateTime = {};
     shows.forEach((show) => {
@@ -186,11 +186,53 @@ const getSingleShow = AsyncHandler(async (req, res) => {
             )
         )
 })
+
+const listShows = AsyncHandler(async (req, res) => {
+    const shows = await Show.find({
+        occupiedSeats: { $ne: {} }
+    })
+        .populate("movie")
+        .sort({ showDateTime: 1 });
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                "Successfully fetched all shows!",
+                shows
+            )
+        )
+})
+
+const getTrailer = AsyncHandler(async (req, res) => {
+    const { movieId } = req.params
+    const data = await apiGet(`/movie/${movieId}/videos`);
+    if (!data) throw new ApiError(500, "Error fetching the movie trailers");
+    const trailerResponse = data.results;
+
+    const trailer = trailerResponse.find((video) => video.type === "Trailer" && video.official === true && video.site === "YouTube")
+
+
+    const trailerLink = `https://www.youtube.com/watch?v=${trailer?.key}`
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                "Trailer is fetched successfully!",
+                trailerLink
+            )
+        )
+
+})
 export {
     getNowPlayingMovies,
     getUpcomingMovies,
     addShow,
     getAllShows,
-    getSingleShow
+    getSingleShow,
+    listShows,
+    getTrailer
 }
 

@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { assests } from "../assets/assests.js";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  MenuIcon,
-  ShieldUser,
-  ShieldUserIcon,
-  TicketPlus,
-  XIcon,
-} from "lucide-react";
+import { MenuIcon, ShieldUserIcon, TicketPlus, XIcon } from "lucide-react";
 import Button from "./Button.jsx";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { useAppContext } from "../context/AppContext.jsx";
 
 const NavBar = () => {
   const { isAdmin } = useAppContext();
-  const navItems = ["Home", "Movies", "Theaters", "Releases", "Favourites"];
+  const navItems = ["Home", "Movies", "Theaters", "Wishlist"];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useUser();
   const { openSignIn } = useClerk();
@@ -26,7 +20,12 @@ const NavBar = () => {
 
   return (
     <nav className="flex items-center justify-between w-full px-6 py-2 rounded-full text-white text-sm fixed top-0 left-0 z-50 bg-transparent">
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() => {
+          scrollTo(0, 0);
+        }}
+      >
         <img
           src={assests.favicon}
           alt=""
@@ -39,6 +38,9 @@ const NavBar = () => {
           <Link
             key={item}
             to={`/${item.toLowerCase()}`}
+            onClick={() => {
+              scrollTo(0, 0);
+            }}
             className="relative overflow-hidden h-6 group capitalize"
           >
             <span className="block group-hover:-translate-y-full transition-transform duration-300">
@@ -73,9 +75,9 @@ const NavBar = () => {
 
               {isAdmin && (
                 <UserButton.Action
-                  onClick={() => navigate("/admin")}
                   label="Admin Panel"
                   labelIcon={<ShieldUserIcon className="w-[1rem]" />}
+                  onClick={() => navigate("/admin")}
                 />
               )}
             </UserButton.MenuItems>

@@ -15,19 +15,18 @@ import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
 const MovieDetails = () => {
-  const { image_base_url, navigate, shows } = useAppContext();
+  const { image_base_url, user } = useAppContext();
   // console.log("From Movie details\n shows ");
 
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
+  const [trailer, setTrailer] = useState("");
   const [show, setShow] = useState(null);
-  const [clicked, setClicked] = useState(false);
 
   const fetchRecommendations = async () => {
     try {
-      const {data}= await axios.get(
+      const { data } = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/recommendations`,
         {
           headers: {
@@ -36,8 +35,8 @@ const MovieDetails = () => {
         }
       );
       // console.log(data);
-      
-      if (data) setRecommendations(data.results.slice(0,4));
+
+      if (data) setRecommendations(data.results.slice(0, 4));
     } catch (error) {
       console.error("Failed to fetch movie recommendations \n", error);
     }
@@ -48,7 +47,7 @@ const MovieDetails = () => {
       const { data } = await axios.get(`/show/${id}`);
       if (data.success) {
         // console.log(data.data);
-        
+
         setShow(data.data);
         setCast(data.data[0].casts);
       }
@@ -56,39 +55,22 @@ const MovieDetails = () => {
       console.error(error);
     }
   };
-  const getMovieData = () => {};
 
-  const fetchMovieData = async () => {
+  const fetchTrailers = async () => {
     try {
-      const options = {
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-        },
-      };
-
-      const [movieRes, castRes, recRes] = await Promise.all([
-        axios.get(`https://api.themoviedb.org/3/movie/${id}`, options),
-        axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, options),
-        axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/recommendations`,
-          options
-        ),
-      ]);
-
-      setCast(castRes.data.cast);
-      setRecommendations(recRes.data.results.slice(0, 4));
-      setShow({
-        movie: movieRes.data,
-        dateTime: dummyDateTimeData,
-      });
-    } catch (err) {
-      console.error("Error fetching movie details:", err);
+      const { data } = await axios.get(`/show/${id}/trailer`);
+      // console.log(data);
+      if (data.success) setTrailer(data.data);
+      else toast.error("No Trailer Found for the movie");
+    } catch (error) {
+      console.error(error);
     }
   };
 
   useEffect(() => {
     getShow();
     fetchRecommendations();
+    fetchTrailers();
     // fetchMovieData();
   }, [id]);
 
@@ -142,20 +124,9 @@ const MovieDetails = () => {
               whileHover={{ scale: 1.05 }}
               className="bg-white/10 px-6 py-2 rounded-full text-sm font-semibold transition backdrop-blur-md"
             >
-              Watch Trailer
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="bg-primary-700 hover:bg-primary-600 px-6 py-2 rounded-full text-sm font-semibold"
-            >
-              Buy Tickets
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="transition backdrop-blur-md"
-            >
-              <HeartIcon className="fill-red-500 text-red-500" />
+              <a href={trailer} target="_blank">
+                Watch Trailer
+              </a>
             </motion.button>
           </div>
         </div>

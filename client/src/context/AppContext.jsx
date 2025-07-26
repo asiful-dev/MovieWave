@@ -14,8 +14,9 @@ const AppProvider = ({ children }) => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [shows, setShows] = useState([]);
-  const [movies, setMovies] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showDetails, setShowDetails] = useState([]);
+  const [wishtlist, setWishlist] = useState([]);
 
   const { getToken } = useAuth();
   const { user } = useUser();
@@ -51,7 +52,6 @@ const AppProvider = ({ children }) => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-     
 
       const isTheUserAdmin = data?.data?.isAdmin;
       setIsAdmin(isTheUserAdmin);
@@ -102,7 +102,20 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const listShows = async () => {
+    try {
+      const { data } = await axios.get("/show/list-shows");
+      // console.log(data.data);
+      if (data) {
+        setShowDetails(data.data);
+      } else toast.error(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
+    listShows();
     fetchShows();
     fetchNowPlayingMovies();
     fetchUpcomingMovies();
@@ -127,6 +140,9 @@ const AppProvider = ({ children }) => {
     isAdmin,
     getToken,
     fetchShows,
+    listShows,
+    showDetails,
+    wishtlist,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
