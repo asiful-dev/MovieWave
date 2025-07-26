@@ -20,6 +20,9 @@ import ListBookings from "./pages/admin/ListBookings";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Loader from "./components/Loader";
 import News from "./pages/News";
+import AboutUs from "./pages/AboutUs";
+import Careers from "./pages/Careers";
+import Theaters from "./pages/Theaters";
 
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
@@ -49,7 +52,10 @@ function App() {
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/loading/:nextUrl" element={<Loader />} />
         <Route path="/news" element={<News />} />
-       
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/theaters" element={<Theaters />} />
+
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute />}>

@@ -23,22 +23,20 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { label: "About Us", href: "/about" },
-      { label: "Careers", href: "/careers" },
-      { label: "Press", href: "/press" },
-      { label: "Blog", href: "/blog" },
+      { label: "About Us", to: "/about" },
+      { label: "Careers", to: "/careers" },
+      { label: "News", to: "/news" },
     ],
     services: [
-      { label: "Movie Tickets", href: "/movies" },
-      { label: "Gift Cards", href: "/gift-cards" },
-      { label: "Group Bookings", href: "/group-bookings" },
-      { label: "Private Screenings", href: "/private-screenings" },
+      { label: "Movie Tickets", to: "/movies" },
+      { label: "Gift Cards", to: "/gift-cards" },
+      { label: "Private Screenings", to: "/private-screenings" },
     ],
     support: [
-      { label: "Help Center", href: "/help" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Terms of Service", href: "/terms" },
-      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Help Center", to: "/help" },
+      { label: "Contact Us", to: "/contact" },
+      { label: "Terms of Service", to: "/terms" },
+      { label: "Privacy Policy", to: "/privacy" },
     ],
   };
 
@@ -59,22 +57,16 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: Instagram,
-      href: "https://instagram.com/moviewave",
+      href: "https://instagram.com",
       label: "Instagram",
     },
-    { icon: Twitter, href: "https://twitter.com/moviewave", label: "Twitter" },
-    { icon: Youtube, href: "https://youtube.com/moviewave", label: "YouTube" },
+    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+    { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
     {
       icon: Linkedin,
-      href: "https://linkedin.com/company/moviewave",
+      href: "https://linkedin.com/company",
       label: "LinkedIn",
     },
-  ];
-
-  const stats = [
-    { icon: Film, value: "10K+", label: "Movies" },
-    { icon: Ticket, value: "1M+", label: "Tickets Sold" },
-    { icon: Users, value: "500K+", label: "Happy Customers" },
   ];
 
   return (
@@ -165,7 +157,8 @@ const Footer = () => {
                     {links.map((link, linkIndex) => (
                       <li key={linkIndex}>
                         <Link
-                          to={link.href}
+                          to={link.to}
+                          onClick={() => scrollTo(0, 0)}
                           className="text-sm text-white/60 hover:text-white transition-colors duration-300 hover:underline underline-offset-2 inline-flex items-center gap-1 group"
                         >
                           {link.label}
@@ -177,8 +170,6 @@ const Footer = () => {
                 </motion.div>
               ))}
             </div>
-
-          
           </div>
         </div>
 
