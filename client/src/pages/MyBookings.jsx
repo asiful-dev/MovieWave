@@ -37,7 +37,7 @@ const MyBookings = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="relative px-4 md:px-16 lg:px-40 pt-24 md:pt-40 min-h-[80vh] text-white">
+    <div className="relative px-4 md:px-16 lg:px-40 py-24 md:py-40 min-h-[80vh] text-white">
       <div className="hidden lg:block">
         <BlurCircle top="100px" left="100px" />
         <BlurCircle bottom="0px" left="600px" />

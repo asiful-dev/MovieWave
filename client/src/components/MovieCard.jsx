@@ -12,7 +12,12 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
-const MovieCard = ({ movie, index = 0, size = "default" }) => {
+const MovieCard = ({
+  movie,
+  index = 0,
+  size = "default",
+  isUpcoming = false,
+}) => {
   const { image_base_url, genreMap, navigate } = useAppContext();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -46,7 +51,12 @@ const MovieCard = ({ movie, index = 0, size = "default" }) => {
         scale: 1.02,
       }}
       whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 200, damping: 18,delay: index * 0.1  }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 18,
+        delay: index * 0.1,
+      }}
       onClick={handleCardClick}
       className={`
         relative w-full ${sizeClasses[size]} max-w-sm mx-auto 
@@ -84,8 +94,6 @@ const MovieCard = ({ movie, index = 0, size = "default" }) => {
             {movie.vote_average.toFixed(1)}
           </motion.div>
         )}
-
-      
 
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
@@ -142,18 +150,20 @@ const MovieCard = ({ movie, index = 0, size = "default" }) => {
               whileTap={{ scale: 0.95 }}
               className="flex-1"
             >
-              <Button
-                className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300 flex items-center justify-center gap-2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/movies/${movie._id}`);
-                  scrollTo(0, 0);
-                }}
-              >
-                <PlayIcon className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Book Now</span>
-                <span className="sm:hidden">Book</span>
-              </Button>
+              {!isUpcoming && (
+                <Button
+                  className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300 flex items-center justify-center gap-2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/movies/${movie._id}`);
+                    scrollTo(0, 0);
+                  }}
+                >
+                  <PlayIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">Book Now</span>
+                  <span className="sm:hidden">Book</span>
+                </Button>
+              )}
             </motion.div>
 
             {/* Secondary Action - More Info */}

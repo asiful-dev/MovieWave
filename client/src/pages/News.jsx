@@ -10,9 +10,7 @@ const News = () => {
   const fetchNews = async () => {
     try {
       const { data } = await axios.get(
-        `https://newsapi.org/v2/everything?q=${
-          import.meta.env.VITE_SEARCH_FILTER
-        }&language=en&pageSize=12&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+        `https://gnews.io/api/v4/search?q=movie&lang=en&country=us&max=9&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`
       );
 
       setNewsArticles(data.articles);
@@ -45,9 +43,9 @@ const News = () => {
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 flex flex-col"
             >
-              {article.urlToImage && (
+              {article.image && (
                 <img
-                  src={article.urlToImage}
+                  src={article.image}
                   alt={article.title}
                   className="h-48 w-full object-cover"
                 />

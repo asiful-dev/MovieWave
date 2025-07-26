@@ -23,6 +23,7 @@ import News from "./pages/News";
 import AboutUs from "./pages/AboutUs";
 import Careers from "./pages/Careers";
 import Theaters from "./pages/Theaters";
+import HelpCenter from "./pages/HelpCenter";
 
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
@@ -55,6 +56,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/theaters" element={<Theaters />} />
+        <Route path="/help" element={<HelpCenter />} />
 
 
         {/* Admin routes */}

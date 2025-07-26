@@ -2,21 +2,28 @@ import React, { useEffect, useState } from "react";
 import { MapPin, Film, CalendarDays, Video } from "lucide-react";
 import { assests } from "../assets/assests";
 
+const theaterImage1 = assests.movieTheaterImg;
+const theaterImage2 = assests.movieTheaterImg2;
+const theaterImage3 = assests.movieTheaterImg3;
+
 const mockTheaters = [
   {
     name: "Star Cineplex",
     location: "Bashundhara City, Dhaka",
     shows: ["Inception", "Oppenheimer", "Shazam"],
+    image: theaterImage1,
   },
   {
     name: "Blockbuster Cinemas",
     location: "Jamuna Future Park, Dhaka",
     shows: ["Jawan", "Dune", "Fast X"],
+    image: theaterImage2,
   },
   {
     name: "Silver Screen",
     location: "Chattogram GEC",
     shows: ["The Batman", "Top Gun: Maverick"],
+    image: theaterImage3,
   },
 ];
 
@@ -28,7 +35,6 @@ const Theaters = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const theaterImage=assests.movieTheaterImg
   return (
     <div className="min-h-screen w-full bg-[#152e49] text-white py-[10rem] px-4">
       <div className="text-center mb-16">
@@ -36,7 +42,8 @@ const Theaters = () => {
           Theaters Near You
         </h1>
         <p className="text-gray-300 text-lg mt-4 max-w-2xl mx-auto">
-          Discover theaters where your favorite movies are playing — with showtimes, featured films, and immersive experiences.
+          Discover theaters where your favorite movies are playing — with
+          showtimes, featured films, and immersive experiences.
         </p>
       </div>
 
@@ -50,7 +57,7 @@ const Theaters = () => {
           >
             <div className="mb-4">
               <img
-                src={theaterImage}
+                src={theater.image}
                 alt="Theater"
                 className="rounded-xl object-cover h-40 w-full shadow-md"
               />
@@ -62,7 +69,6 @@ const Theaters = () => {
               <MapPin className="w-4 h-4 text-primary-500" />
               {theater.location}
             </p>
-            
           </div>
         ))}
       </div>

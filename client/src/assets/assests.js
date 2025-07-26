@@ -3,13 +3,17 @@ import favicon from "/favicon.png"
 import adventure from "./adventure.jpg"
 import profile from "./profile.svg"
 import movieTheaterImg from "./movie-theater.jpg";
+import movieTheaterImg2 from "./movie-theater-2.jpg"
+import movieTheaterImg3 from "./movie-theater-3.jpg"
 
 const assests = {
     logo,
     favicon,
     adventure,
     profile,
-    movieTheaterImg
+    movieTheaterImg,
+    movieTheaterImg2,
+    movieTheaterImg3
 }
 
 const dummyCastsData = [

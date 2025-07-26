@@ -29,8 +29,8 @@ const Footer = () => {
     ],
     services: [
       { label: "Movie Tickets", to: "/movies" },
-      { label: "Gift Cards", to: "/gift-cards" },
-      { label: "Private Screenings", to: "/private-screenings" },
+      { label: "Gift Cards", to: "/movies" },
+      { label: "Private Screenings", to: "/movies" },
     ],
     support: [
       { label: "Help Center", to: "/help" },

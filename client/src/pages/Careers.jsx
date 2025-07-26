@@ -7,11 +7,6 @@ const Careers = () => {
 
   const positions = [
     {
-      title: "Frontend Developer",
-      location: "Remote",
-      desc: "Build sleek user interfaces with React and TailwindCSS.",
-    },
-    {
       title: "Content Curator",
       location: "Dhaka, BD",
       desc: "Curate and categorize high-quality movie data and reviews.",
@@ -21,11 +16,7 @@ const Careers = () => {
       location: "Remote",
       desc: "Drive community engagement across platforms.",
     },
-    {
-      title: "AI/ML Engineer",
-      location: "Hybrid",
-      desc: "Enhance recommendations using machine learning models.",
-    },
+    
   ];
 
   useEffect(() => {
