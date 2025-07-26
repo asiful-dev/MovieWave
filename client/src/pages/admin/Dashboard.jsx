@@ -59,7 +59,7 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {nowPlayingMovies.slice(0, 3).map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} movie={movie} isUpcoming={true} />
         ))}
       </div>
     </>
