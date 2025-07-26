@@ -6,19 +6,19 @@
 ## Top Features
 
 - Inspired by **iOS 26**'s **liquid glass** aesthetic, the design prioritized usability and simplicity.
-<br/>
+
 
 - **Clerk** handles all the authentication system in app. For simplicity, I kept **google sign-in and email and password based sign in** only. Also I utilized **Clerk** for, secure role-based login for both Admin and normal user login.
-<br/>
+
 
 - Used **Inngest** for autmatic seat release after 10 minutes, when the user didn't paid for the ticket, also my **Inngest Functions** also handle automatic user insertion, deletion and updation in the database
-<br/>
+
 
 - For the movie information like movie details, images etc , I have used TMDB Api 
-<br/>
+
 
 - Used **Stripe** for payment gateaway, currently using the test mode of **Stripe**
-<br/>
+
 
 - Admins can manage users, shows, bookings, and more from a clean, intuitive dashboard.
 
