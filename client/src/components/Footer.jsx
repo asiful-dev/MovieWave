@@ -96,7 +96,7 @@ const Footer = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full bg-gradient-to-b from-[#0c1f33] via-[#153456] to-[#0d355d] text-white/80 mt-20 overflow-hidden"
+        className="w-full bg-gradient-to-b from-[#0c1f33] via-[#153456] to-[#0d355d] text-white/80 overflow-hidden"
       >
         {/* Main Footer Content */}
         <div className="px-4 sm:px-6 md:px-12 py-12 sm:py-16">
@@ -178,33 +178,7 @@ const Footer = () => {
               ))}
             </div>
 
-            {/* Contact Information - Mobile & Tablet Optimized */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="mt-12 pt-8 border-t border-white/10"
-            >
-              <h4 className="text-white font-semibold text-base mb-6 text-center md:text-left">
-                Get In Touch
-              </h4>
-
-              <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                {contactInfo.map((contact, index) => (
-                  <motion.a
-                    key={index}
-                    href={contact.href}
-                    whileHover={{ scale: 1.02 }}
-                    className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3 p-4 bg-white/5 hover:bg-white/10 rounded-lg transition-colors duration-300 text-white group"
-                  >
-                    <contact.icon className="w-5 h-5 text-blue-400" />
-                    <span className="text-sm text-white/60 group-hover:text-white text-center sm:text-left">
-                      {contact.label}
-                    </span>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
+          
           </div>
         </div>
 

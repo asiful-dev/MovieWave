@@ -113,6 +113,7 @@ const AppProvider = ({ children }) => {
       console.error(error);
     }
   };
+  
 
   useEffect(() => {
     listShows();

@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { getOccupiedSeats } from "../controllers/booking.controller.js";
-import { getUserBookings, getWishlist, updateWishlist } from "../controllers/user.controller.js";
+import { getUserBookings } from "../controllers/user.controller.js";
 
 const userRouter = Router();
 

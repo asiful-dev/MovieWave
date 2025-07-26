@@ -122,6 +122,7 @@ const MovieDetails = () => {
           <div className="flex gap-4 mt-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
+              
               className="bg-white/10 px-6 py-2 rounded-full text-sm font-semibold transition backdrop-blur-md"
             >
               <a href={trailer} target="_blank">

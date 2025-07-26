@@ -1,6 +1,7 @@
 import { Router } from "express"
 import {
     addShow,
+    deleteShow,
     getAllShows,
     getNowPlayingMovies,
     getSingleShow,
@@ -8,6 +9,7 @@ import {
     getUpcomingMovies,
     listShows
 } from "../controllers/show.controller.js";
+import protectAdmin from "../middlewares/auth.middleware.js";
 
 const showRouter = Router();
 
@@ -18,6 +20,7 @@ showRouter.route("/add").post(addShow)
 showRouter.route("/all").get(getAllShows)
 showRouter.route("/:movieId").get(getSingleShow)
 showRouter.route("/:movieId/trailer").get(getTrailer)
+showRouter.route("/delete").delete(protectAdmin, deleteShow)
 
 
 

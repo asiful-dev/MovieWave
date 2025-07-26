@@ -140,6 +140,21 @@ const addShow = AsyncHandler(async (req, res) => {
         );
 });
 
+const deleteShow = AsyncHandler(async (req, res) => {
+    const { showId } = req.body;
+    const show = await Show.findById(showId);
+    if (!show) throw new ApiError(404, "Show Not Found");
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                "Show Deleted Successfully!",
+                show
+            )
+        )
+})
+
 const getAllShows = AsyncHandler(async (_, res) => {
     const shows = await Show.find({}).populate("movie").sort({ showDateTime: 1 });
 
@@ -233,6 +248,7 @@ export {
     getAllShows,
     getSingleShow,
     listShows,
-    getTrailer
+    getTrailer,
+    deleteShow
 }
 

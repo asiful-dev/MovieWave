@@ -19,7 +19,7 @@ const NowShowingSection = () => {
       </div>
       <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:flex-wrap my-4">
         {shows.slice(0, 6).map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
       <div className="my-10 flex justify-center">

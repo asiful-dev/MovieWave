@@ -32,7 +32,7 @@ const getDashBoardData = AsyncHandler(async (req, res) => {
         showDateTime: {
             $gte: new Date()
         }
-    }).populate("movies");
+    }).populate("movie");
 
     const totalUser = await User.countDocuments();
 

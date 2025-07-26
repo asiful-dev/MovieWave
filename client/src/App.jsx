@@ -10,7 +10,6 @@ import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import SeatLayout from "./pages/SeatLayout";
 import MyBookings from "./pages/MyBookings";
-import Favourites from "./pages/Favourites";
 import Home from "./pages/Home";
 import { useAppContext } from "./context/AppContext";
 import { SignIn } from "@clerk/clerk-react";
@@ -20,6 +19,8 @@ import ListShows from "./pages/admin/ListShows";
 import ListBookings from "./pages/admin/ListBookings";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Loader from "./components/Loader";
+import News from "./pages/News";
+
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
 
@@ -28,7 +29,7 @@ function App() {
 
     if (!user)
       return (
-        <div className="flex-1 px-4 py-10 md:px-10 h-[calc(100vh-64px)] overflow-y-auto">
+        <div className="flex-1 px-4 py-10 md:px-10 h-auto overflow-y-auto">
           <SignIn fallbackRedirectUrl={"/admin"} />
         </div>
       );
@@ -47,7 +48,8 @@ function App() {
         <Route path="/movies/:id/:date" element={<SeatLayout />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/loading/:nextUrl" element={<Loader />} />
-        <Route path="/favourties" element={<Favourites />} />
+        <Route path="/news" element={<News />} />
+       
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute />}>

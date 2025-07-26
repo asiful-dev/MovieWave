@@ -33,7 +33,7 @@ const HeroSection = () => {
               >
                 <div className="max-w-md md:max-w-lg lg:max-w-xl bg-white/10 backdrop-blur-lg p-6 md:p-8 rounded-2xl shadow-lg">
                   <h2 className="text-3xl md:text-4xl font-extrabold mb-4 flex items-center gap-2">
-                    <FilmIcon className="w-8 h-7 text-blue-400" /> {movie.title}
+                     {movie.title}
                   </h2>
 
                   <div className="mb-4 text-sm md:text-base flex items-center gap-4 flex-wrap text-slate-300">

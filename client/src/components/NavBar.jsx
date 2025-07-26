@@ -8,7 +8,7 @@ import { useAppContext } from "../context/AppContext.jsx";
 
 const NavBar = () => {
   const { isAdmin } = useAppContext();
-  const navItems = ["Home", "Movies", "Theaters", "Wishlist"];
+  const navItems = ["Home", "Movies", "Theaters", "News"];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useUser();
   const { openSignIn } = useClerk();
@@ -73,12 +73,14 @@ const NavBar = () => {
                 labelIcon={<TicketPlus className="w-[1rem]" />}
               />
 
-              {isAdmin && (
+              {isAdmin ? (
                 <UserButton.Action
                   label="Admin Panel"
                   labelIcon={<ShieldUserIcon className="w-[1rem]" />}
                   onClick={() => navigate("/admin")}
                 />
+              ) : (
+                ""
               )}
             </UserButton.MenuItems>
           </UserButton>
@@ -139,12 +141,14 @@ const NavBar = () => {
                         label="My Bookings"
                         labelIcon={<TicketPlus className="w-[1rem]" />}
                       />
-                      {isAdmin && (
+                      {isAdmin ? (
                         <UserButton.Action
-                          onClick={() => navigate("/admin")}
                           label="Admin Panel"
                           labelIcon={<ShieldUserIcon className="w-[1rem]" />}
+                          onClick={() => navigate("/admin")}
                         />
+                      ) : (
+                        ""
                       )}
                     </UserButton.MenuItems>
                   </UserButton>

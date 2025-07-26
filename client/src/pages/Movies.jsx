@@ -7,13 +7,13 @@ import { useAppContext } from "../context/AppContext";
 const Movies = () => {
   const { nowPlayingMovies,shows } = useAppContext();
   return nowPlayingMovies ? (
-    <div className="w-full px-6 md:px-16 lg:px-20 overflow-hidden  "> 
+    <div className="w-full px-6 md:px-16 lg:px-20 overflow-hidden mb-10 "> 
       <div className="flex items-center justify-between pt-[10rem] pb-10 ">
         <p className="text-gray-300 font-medium text-lg">Now Showing</p>
       </div>
-      <div className="flex flex-col items-center justify-center gap-5 md:flex-row md:flex-wrap my-4">
+      <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:flex-wrap my-4">
         {shows.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
     </div>
