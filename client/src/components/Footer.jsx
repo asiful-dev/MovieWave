@@ -36,7 +36,7 @@ const Footer = () => {
       { label: "Help Center", to: "/help" },
       { label: "Contact Us", to: "/contact" },
       { label: "Terms of Service", to: "/terms" },
-      { label: "Privacy Policy", to: "/privacy" },
+      { label: "Privacy Policy", to: "/privacy-policy" },
     ],
   };
 
