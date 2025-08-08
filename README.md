@@ -1,7 +1,7 @@
 # ![MovieWave Logo](./client/public/logo.png)
 ## <a href="https://movie-wave-red.vercel.app" target="_blank">🌐 Live Demo</a>
 
-**MovieWave** is a full-stack Online Movie Ticket Booking System using MERN for movie discovery, online booking, and theater management. Built with autonomous task management and feature riched and responsive UI.
+**Moviewave** is a full-stack Online Movie Ticket Booking System using MERN for movie discovery, online booking, and theater management. Built with autonomous task management and feature riched and responsive UI.
 
 ## Top Features
 
