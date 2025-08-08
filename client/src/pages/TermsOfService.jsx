@@ -171,7 +171,7 @@ const TermsOfService = () => {
               These Terms of Service constitute a legally binding agreement between you and MovieWave. By using our streaming platform, you acknowledge that you have read, understood, and agree to be bound by these terms. We recommend reading the full terms below to understand your rights and responsibilities.
             </p>
             
-            {/* Acknowledgment */}
+            {/* Acknowledgment Section */}
             <div className="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-primary-500/30">
               <input
                 type="checkbox"
