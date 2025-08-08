@@ -14,7 +14,7 @@ const News = () => {
       );
       setNewsArticles(data.articles);
     } catch (error) {
-      console.error("Failed to fetch news articles from GNews API", error);
+      console.error("Failed to fetch news articles", error);
     } finally {
       setLoading(false);
     }
