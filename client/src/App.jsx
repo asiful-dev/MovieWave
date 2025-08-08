@@ -24,6 +24,8 @@ import AboutUs from "./pages/AboutUs";
 import Careers from "./pages/Careers";
 import Theaters from "./pages/Theaters";
 import HelpCenter from "./pages/HelpCenter";
+import ContactUs from "./pages/ContactUs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
@@ -57,7 +59,8 @@ function App() {
         <Route path="/careers" element={<Careers />} />
         <Route path="/theaters" element={<Theaters />} />
         <Route path="/help" element={<HelpCenter />} />
-
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute />}>
