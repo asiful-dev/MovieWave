@@ -19,7 +19,7 @@
 
 ## Stripe Payment Gateway Guide For My App
 Use **4242 4242 4242 4242** as your card number  
-Use any valid date for the date field (for example - **12/34**)  
+Use any valid date for the date field (for example - **12/36**)  
 Use any valid number for the **CVC** field (for example: **123**)
 
 ![sample_payment_form_filiup](./client/public/Stripe-example.png)
