@@ -10,7 +10,7 @@ const News = () => {
   const fetchNews = async () => {
     try {
       const { data } = await axios.get(
-        `https://gnews.io/api/v4/search?q=movie&lang=en&country=us&max=9&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`
+        `https://gnews.io/api/v4/search?q=movies&lang=en&country=us&max=9&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`
       );
       setNewsArticles(data.articles);
     } catch (error) {
