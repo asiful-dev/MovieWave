@@ -11,7 +11,7 @@ const DateSelect = ({ dateTime, id }) => {
   const { user } = useAppContext();
 
   const onBookHandler = () => {
-    return toast.error("Please select a date to proceed");
+    if (!selected) return toast.error("Please select a date to proceed");
     if (!user) return toast.error("Please Login To Proceed");
     navigate(`/movies/${id}/${selected}`);
     scrollTo({ top: 0, behavior: "smooth" });
