@@ -95,7 +95,7 @@ const HelpCenter = () => {
                 <h4 className="text-lg font-semibold text-white mb-2">
                   {q}
                 </h4>
-                <p className="text-sm text-gray-300">{a}</p>
+                <p className="text-lg text-gray-300">{a}</p>
               </div>
             ))}
           </div>
