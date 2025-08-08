@@ -12,10 +12,9 @@ const News = () => {
       const { data } = await axios.get(
         `https://gnews.io/api/v4/search?q=movie&lang=en&country=us&max=9&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`
       );
-
       setNewsArticles(data.articles);
     } catch (error) {
-      console.error("Failed to fetch news articles", error);
+      console.error("Failed to fetch news articles from GNews API", error);
     } finally {
       setLoading(false);
     }
