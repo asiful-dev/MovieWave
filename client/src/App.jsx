@@ -26,6 +26,7 @@ import Theaters from "./pages/Theaters";
 import HelpCenter from "./pages/HelpCenter";
 import ContactUs from "./pages/ContactUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 function App() {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
@@ -61,6 +62,7 @@ function App() {
         <Route path="/help" element={<HelpCenter />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
 
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute />}>
