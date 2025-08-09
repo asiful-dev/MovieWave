@@ -36,7 +36,7 @@ const Theaters = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[#152e49] text-white py-[10rem] px-4">
+    <div className="min-h-screen w-full bg-[#162e49] text-white py-[10rem] px-4">
       <div className="text-center mb-16">
         <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text animate-pulse">
           Theaters Near You
