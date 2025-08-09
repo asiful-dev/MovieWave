@@ -6,7 +6,7 @@ const KeyMetricsCards = ({ title, data, IconName, dollarIcon }) => {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-gray-400 text-sm font-medium">{title}</p>
-          <p className="text-4xl font-bold text-white">
+          <p className="text-2xl font-bold text-white">
             {dollarIcon && "$"} {data}
           </p>
         </div>
