@@ -8,8 +8,6 @@ import { useAppContext } from "../../context/AppContext";
 
 const AdminLayout = () => {
   const { isAdmin } = useAppContext();
-  console.log("Is the user Admin",isAdmin);
-  
 
   return isAdmin ? (
     <>

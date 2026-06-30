@@ -42,8 +42,6 @@ const AddShows = () => {
       };
     });
   }
-  // console.log(dateTimeSelection);
-
   // Helper functions to format date and time
   function formatDate(dateStr) {
     const date = new Date(dateStr);
@@ -79,15 +77,14 @@ const AddShows = () => {
       ) {
         setIsAddingShow(false);
         return toast.error(
-          "Please select a movie, enter show price and select at least one date-time."
+          "Please select a movie, enter show price and select at least one date-time.",
         );
       }
 
       // Convert dateTimeSelection object to array of { date, time } objects
       const showsInput = Object.entries(dateTimeSelection).map(
-        ([date, times]) => ({ date, time: times })
+        ([date, times]) => ({ date, time: times }),
       );
-      console.log("Converted showsInput:", showsInput);
 
       const payload = {
         movieId: selectedMovieId,
@@ -132,7 +129,7 @@ const AddShows = () => {
               }`}
               onClick={() =>
                 setSelectedMovieId(
-                  selectedMovieId === movie.id ? null : movie.id
+                  selectedMovieId === movie.id ? null : movie.id,
                 )
               }
             >

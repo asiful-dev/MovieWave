@@ -44,7 +44,9 @@ const SeatLayout = () => {
       return toast("This seat is already booked");
 
     setSelectedSeats((prev) =>
-      prev.includes(seatId) ? prev.filter((seat) => seat !== seatId) : [...prev, seatId]
+      prev.includes(seatId)
+        ? prev.filter((seat) => seat !== seatId)
+        : [...prev, seatId],
     );
   }
 
@@ -59,9 +61,11 @@ const SeatLayout = () => {
                 key={seatId}
                 onClick={() => handleSeatClick(seatId)}
                 className={`h-10 w-10 rounded border transition-all duration-200 \
-                  ${selectedSeats.includes(seatId)
-                    ? "bg-primary-700 text-white"
-                    : "bg-transparent text-white hover:bg-primary-500 border-primary-700/30"} \
+                  ${
+                    selectedSeats.includes(seatId)
+                      ? "bg-primary-700 text-white"
+                      : "bg-transparent text-white hover:bg-primary-500 border-primary-700/30"
+                  } \
                   ${occupiedSeats.includes(seatId) ? "opacity-50" : ""}`}
               >
                 {seatId}
@@ -75,7 +79,9 @@ const SeatLayout = () => {
 
   const getOccupiedSeats = async () => {
     try {
-      const { data } = await axios.get(`/booking/seats/${selectedTime?.showId}`);
+      const { data } = await axios.get(
+        `/booking/seats/${selectedTime?.showId}`,
+      );
       if (data.success) {
         setOccupiedSeats(data.data);
       } else toast.error(data.message);
@@ -94,7 +100,7 @@ const SeatLayout = () => {
       const { data } = await axios.post(
         "/booking/create",
         { showId: selectedTime.showId, selectedSeats },
-        { headers: { Authorization: `Bearer ${await getToken()}` } }
+        { headers: { Authorization: `Bearer ${await getToken()}` } },
       );
 
       if (data.success) {
@@ -175,7 +181,14 @@ const SeatLayout = () => {
           disabled={loading}
           className="flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary-700 hover:bg-primary-600 transition rounded-full font-medium cursor-pointer active:scale-95 disabled:opacity-50"
         >
-          {loading ? <ClipLoader size={20} color="#fff" /> : <><span>Proceed to Checkout</span><ArrowRightIcon strokeWidth={3} className="w-4 h-4" /></>}
+          {loading ? (
+            <ClipLoader size={20} color="#fff" />
+          ) : (
+            <>
+              <span>Proceed to Checkout</span>
+              <ArrowRightIcon strokeWidth={3} className="w-4 h-4" />
+            </>
+          )}
         </Button>
       </div>
     </div>

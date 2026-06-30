@@ -18,7 +18,6 @@ const Dashboard = () => {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      console.log("From Dashboard ", data.data);
 
       if (data.success) setDashboardData(data.data);
       else toast.error(data.message);

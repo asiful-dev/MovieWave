@@ -13,9 +13,11 @@ const ListShows = () => {
   useEffect(() => {
     setShows(showDetails);
   }, [showDetails]);
-  
+
   const handleDelete = async (showId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this show?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this show?",
+    );
     if (!confirmDelete) return;
 
     try {

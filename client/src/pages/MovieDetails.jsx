@@ -16,8 +16,6 @@ import toast from "react-hot-toast";
 
 const MovieDetails = () => {
   const { image_base_url, user } = useAppContext();
-  // console.log("From Movie details\n shows ");
-
   const { id } = useParams();
   const [cast, setCast] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
@@ -32,10 +30,8 @@ const MovieDetails = () => {
           headers: {
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
           },
-        }
+        },
       );
-      // console.log(data);
-
       if (data) setRecommendations(data.results.slice(0, 4));
     } catch (error) {
       console.error("Failed to fetch movie recommendations \n", error);
@@ -46,8 +42,6 @@ const MovieDetails = () => {
     try {
       const { data } = await axios.get(`/show/${id}`);
       if (data.success) {
-        // console.log(data.data);
-
         setShow(data.data);
         setCast(data.data[0].casts);
       }
@@ -59,7 +53,6 @@ const MovieDetails = () => {
   const fetchTrailers = async () => {
     try {
       const { data } = await axios.get(`/show/${id}/trailer`);
-      // console.log(data);
       if (data.success) setTrailer(data.data);
       else toast.error("No Trailer Found for the movie");
     } catch (error) {
@@ -122,7 +115,6 @@ const MovieDetails = () => {
           <div className="flex gap-4 mt-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
-              
               className="bg-white/10 px-6 py-2 rounded-full text-sm font-semibold transition backdrop-blur-md"
             >
               <a href={trailer} target="_blank">

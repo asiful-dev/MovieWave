@@ -14,7 +14,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-const PrivacyPolicy = () => {
+const LegalPolicy = () => {
   const [expandedSection, setExpandedSection] = useState(null);
 
   const toggleSection = (index) => {
@@ -30,8 +30,8 @@ const PrivacyPolicy = () => {
         "Usage data including viewing history, preferences, and device information",
         "Location data to provide region-appropriate content",
         "Payment information for subscription services (processed securely by third-party providers)",
-        "Technical information such as IP address, browser type, and operating system"
-      ]
+        "Technical information such as IP address, browser type, and operating system",
+      ],
     },
     {
       title: "How We Use Your Information",
@@ -42,8 +42,8 @@ const PrivacyPolicy = () => {
         "Process payments and manage your subscription",
         "Send important updates about service changes or security",
         "Analyze usage patterns to enhance user experience",
-        "Prevent fraud and ensure platform security"
-      ]
+        "Prevent fraud and ensure platform security",
+      ],
     },
     {
       title: "Data Sharing and Disclosure",
@@ -54,8 +54,8 @@ const PrivacyPolicy = () => {
         "Service providers who help operate our platform (hosting, payment processing)",
         "Legal authorities when required by law or to protect our users",
         "Business partners only with your explicit consent",
-        "In case of company merger or acquisition (users will be notified)"
-      ]
+        "In case of company merger or acquisition (users will be notified)",
+      ],
     },
     {
       title: "Data Security",
@@ -66,8 +66,8 @@ const PrivacyPolicy = () => {
         "Multi-factor authentication options for enhanced account security",
         "Secure data centers with 24/7 monitoring",
         "Employee access controls and regular security training",
-        "Immediate breach notification procedures"
-      ]
+        "Immediate breach notification procedures",
+      ],
     },
     {
       title: "Your Privacy Rights",
@@ -78,8 +78,8 @@ const PrivacyPolicy = () => {
         "Delete your account and associated data",
         "Opt-out of marketing communications",
         "Control data sharing preferences",
-        "Request information about how your data is used"
-      ]
+        "Request information about how your data is used",
+      ],
     },
     {
       title: "Cookies and Tracking",
@@ -90,16 +90,32 @@ const PrivacyPolicy = () => {
         "Preference cookies to remember your settings",
         "Third-party cookies for integrated services",
         "You can manage cookie preferences in your browser settings",
-        "Some features may not work properly with cookies disabled"
-      ]
-    }
+        "Some features may not work properly with cookies disabled",
+      ],
+    },
   ];
 
   const quickStats = [
-    { icon: Shield, title: "GDPR Compliant", desc: "Full compliance with EU privacy regulations" },
-    { icon: Lock, title: "256-bit Encryption", desc: "Bank-level security for all data" },
-    { icon: AlertTriangle, title: "No Data Sales", desc: "We never sell your personal information" },
-    { icon: Clock, title: "Updated Regularly", desc: "Policy reviewed and updated quarterly" },
+    {
+      icon: Shield,
+      title: "GDPR Compliant",
+      desc: "Full compliance with EU privacy regulations",
+    },
+    {
+      icon: Lock,
+      title: "256-bit Encryption",
+      desc: "Bank-level security for all data",
+    },
+    {
+      icon: AlertTriangle,
+      title: "No Data Sales",
+      desc: "We never sell your personal information",
+    },
+    {
+      icon: Clock,
+      title: "Updated Regularly",
+      desc: "Policy reviewed and updated quarterly",
+    },
   ];
 
   return (
@@ -111,7 +127,8 @@ const PrivacyPolicy = () => {
             Privacy Policy
           </h1>
           <p className="text-gray-300 text-lg md:text-xl">
-            Your privacy is our priority. Learn how we protect and handle your data at MovieWave.
+            Your privacy is our priority. Learn how we protect and handle your
+            data at MovieWave.
           </p>
           <div className="mt-4 flex items-center justify-center gap-2 text-gray-400">
             <Clock className="w-4 h-4" />
@@ -141,7 +158,11 @@ const PrivacyPolicy = () => {
               <h2 className="text-3xl font-bold text-white">Policy Overview</h2>
             </div>
             <p className="text-gray-300 leading-relaxed text-lg">
-              At MovieWave, we believe transparency is key to building trust. This privacy policy explains how we collect, use, and protect your personal information when you use our streaming platform. We are committed to maintaining the highest standards of data protection and giving you control over your privacy.
+              At MovieWave, we believe transparency is key to building trust.
+              This privacy policy explains how we collect, use, and protect your
+              personal information when you use our streaming platform. We are
+              committed to maintaining the highest standards of data protection
+              and giving you control over your privacy.
             </p>
           </div>
         </div>
@@ -151,7 +172,7 @@ const PrivacyPolicy = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Privacy Details
           </h2>
-          
+
           <div className="space-y-4">
             {privacySections.map(({ title, icon: Icon, content }, index) => (
               <div
@@ -172,13 +193,16 @@ const PrivacyPolicy = () => {
                     <ChevronDown className="w-5 h-5 text-gray-300" />
                   )}
                 </button>
-                
+
                 {expandedSection === index && (
                   <div className="px-6 pb-6">
                     <div className="border-l-4 border-primary-500 pl-4">
                       <ul className="space-y-3">
                         {content.map((item, i) => (
-                          <li key={i} className="text-gray-300 leading-relaxed flex items-start gap-2">
+                          <li
+                            key={i}
+                            className="text-gray-300 leading-relaxed flex items-start gap-2"
+                          >
                             <div className="w-2 h-2 bg-primary-400 rounded-full mt-2 flex-shrink-0" />
                             {item}
                           </li>
@@ -197,10 +221,15 @@ const PrivacyPolicy = () => {
           <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-md">
             <div className="flex items-center gap-3 mb-6">
               <Mail className="w-8 h-8 text-primary-300" />
-              <h2 className="text-3xl font-bold text-white">Questions About Privacy?</h2>
+              <h2 className="text-3xl font-bold text-white">
+                Questions About Privacy?
+              </h2>
             </div>
             <p className="text-gray-300 leading-relaxed mb-6">
-              If you have any questions about this privacy policy or how we handle your data, our privacy team is here to help. We're committed to transparency and will respond to all inquiries promptly.
+              If you have any questions about this privacy policy or how we
+              handle your data, our privacy team is here to help. We're
+              committed to transparency and will respond to all inquiries
+              promptly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="px-6 py-3 bg-primary-600 hover:bg-primary-700 transition-all text-white font-bold rounded-xl shadow-xl">
@@ -216,7 +245,9 @@ const PrivacyPolicy = () => {
         {/* CTA */}
         <div className="mt-20 text-center animate-fade-in">
           <p className="text-lg text-gray-400 italic max-w-2xl mx-auto">
-            Your trust is essential to us. We continuously update our privacy practices to ensure your data remains secure while providing you with the best MovieWave experience.
+            Your trust is essential to us. We continuously update our privacy
+            practices to ensure your data remains secure while providing you
+            with the best MovieWave experience.
           </p>
         </div>
       </div>
@@ -224,4 +255,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default LegalPolicy;

@@ -105,7 +105,6 @@ const AppProvider = ({ children }) => {
   const listShows = async () => {
     try {
       const { data } = await axios.get("/show/list-shows");
-      // console.log(data.data);
       if (data) {
         setShowDetails(data.data);
       } else toast.error(data.message);
@@ -113,7 +112,6 @@ const AppProvider = ({ children }) => {
       console.error(error);
     }
   };
-  
 
   useEffect(() => {
     listShows();
